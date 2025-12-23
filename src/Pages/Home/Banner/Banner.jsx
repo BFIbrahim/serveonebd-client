@@ -37,7 +37,7 @@ const Banner = () => {
 
       <div className="absolute inset-0 z-20 flex flex-col justify-center items-center text-center px-6 text-white">
         
-        <h1 className="text-3xl md:text-4xl font-bold mb-6 max-w-4xl 
+        <h1 className="text-2xl md:text-4xl font-bold mb-6 max-w-4xl 
           bg-gradient-to-br from-green-400 to-blue-600 
           hover:from-blue-600 hover:to-green-400 
           text-transparent bg-clip-text">
