@@ -4,6 +4,7 @@ import ServiceCard from '../ServiceCard/ServiceCard';
 import TestimonialsSection from '../Testimonials/TestimonialsSection';
 import Footer from '../../../Shared/Footer';
 import LiveCampaigns from '../LiveCampaigns/LiveCampaigns';
+import HowItWorks from '../HowItWorks/HowItWorks';
 
 const Home = () => {
     return (
@@ -11,6 +12,7 @@ const Home = () => {
             <Banner></Banner>
             <ServiceCard></ServiceCard>
             <LiveCampaigns></LiveCampaigns>
+            <HowItWorks></HowItWorks>
             {/* <CallToAction></CallToAction> */}
             <TestimonialsSection></TestimonialsSection>
             <Footer></Footer>

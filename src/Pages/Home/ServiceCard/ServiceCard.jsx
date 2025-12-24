@@ -1,4 +1,6 @@
-import React from "react";
+import Aos from "aos";
+import React, { useEffect } from "react";
+import "aos/dist/aos.css";
 import { FaPills, FaUtensils, FaTshirt } from "react-icons/fa";
 
 const services = [
@@ -23,8 +25,16 @@ const services = [
 ];
 
 const ServiceCard = () => {
+
+  useEffect(() => {
+    Aos.init({
+      duration: 700, 
+      easing: "ease-in-out",
+      once: false, 
+    });
+  }, []);
   return (
-    <section className="py-16 px-6 md:px-20 bg-gray-50">
+    <section data-aos="fade-up" className="py-16 px-6 md:px-20 bg-gray-50">
       <div className="max-w-6xl mx-auto">
         <div className="grid gap-8 sm:grid-cols-1 md:grid-cols-3">
           {services.map((service) => (

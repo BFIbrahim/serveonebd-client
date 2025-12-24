@@ -1,3 +1,6 @@
+import Aos from "aos";
+import { useEffect } from "react";
+
 const liveCampaignsData = [
   {
     id: 1,
@@ -26,6 +29,15 @@ const liveCampaignsData = [
 ];
 
 const LiveCampaigns = () => {
+
+      useEffect(() => {
+        Aos.init({
+          duration: 700, 
+          easing: "ease-in-out",
+          once: false, 
+        });
+      }, []);
+
   return (
     <section className="py-16 bg-gray-50">
       <div className="container mx-auto px-6 md:px-12">
@@ -34,7 +46,7 @@ const LiveCampaigns = () => {
         </h2>
         <p className="text-accent text-center md:w-[70%] mx-auto mb-12 mt-3">Join our active campaigns and make a real impact by supporting people in need. Every contribution counts toward creating a better community.</p>
 
-        <div className="grid gap-8 md:grid-cols-3">
+        <div  data-aos="fade-up" className="grid gap-8 md:grid-cols-3">
           {liveCampaignsData.map((campaign) => (
             <div key={campaign.id} className="bg-white rounded-lg shadow-md overflow-hidden flex flex-col">
               <img
