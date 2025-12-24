@@ -1,76 +1,45 @@
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay, EffectFade } from "swiper/modules";
-
-import "swiper/css";
-import "swiper/css/effect-fade";
+import React from "react";
 import { useNavigate } from "react-router";
-
-const slides = [
-  "https://i.ibb.co.com/b5YC1v59/Chat-GPT-Image-Dec-23-2025-10-08-50-PM.png",
-  "https://i.ibb.co.com/ds4X3pJD/Gemini-Generated-Image-rnmwsirnmwsirnmw.png",
-  "https://i.ibb.co.com/27TqmGhv/Chat-GPT-Image-Dec-23-2025-10-26-20-PM.png",
-];
 
 const CallToAction = () => {
   const navigate = useNavigate();
 
   return (
-    <section className="relative h-[90vh] w-full">
-      <Swiper
-        modules={[Autoplay, EffectFade]}
-        effect="fade"
-        autoplay={{ delay: 3000 }}
-        loop
-        className="h-full w-full"
-      >
-        {slides.map((img, index) => (
-          <SwiperSlide key={index}>
-            <div
-              className="h-full w-full bg-cover bg-center"
-              style={{ backgroundImage: `url(${img})` }}
+    <section className="w-full bg-gradient-to-r from-[#041c38] to-[#02233f] py-[100px] px-6 md:px-20">
+      <div className="container mx-auto flex flex-col md:flex-row items-center gap-12">
+
+        <div className="flex-1 flex justify-center md:justify-start">
+          <div className="relative w-64 h-64 md:w-80 md:h-80">
+            <img
+              src="https://img.freepik.com/premium-photo/smiling-volunteers-cleaning-park_53876-1069102.jpg?semt=ais_hybrid&w=740&q=80"
+              alt="Volunteers"
+              className="w-full h-full object-cover rounded-[50%_40%_60%_50%] shadow-xl"
             />
-          </SwiperSlide>
-        ))}
-      </Swiper>
+          </div>
+        </div>
 
-      <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/60 to-black/80 z-10" />
+        <div className="flex-1 flex flex-col items-center md:items-start text-center md:text-left gap-6">
+          <h2 className="text-3xl md:text-5xl font-bold text-white">
+            Ready to make a difference?
+          </h2>
 
-      <div className="absolute inset-0 z-20 flex flex-col justify-center items-center text-center px-6 text-white">
-        
-        <h1 className="text-2xl md:text-4xl font-bold mb-6 max-w-4xl 
-          bg-gradient-to-br from-green-400 to-blue-600 
-          hover:from-blue-600 hover:to-green-400 
-          text-transparent bg-clip-text">
-          Connecting People Who Need Help With People Who Want to Help
-        </h1>
+          <p className="text-white">Join our community of passionate volunteers and partners to create real impact. Together, we can bring hope, support, and change to those who need it most.</p>
 
-        <p className="text-lg md:text-2xl mb-10 text-gray-200">
-          Medicine • Food • Clothing support in one platform
-        </p>
+          <div className="flex flex-col sm:flex-row gap-4 mt-4">
+            <button
+              onClick={() => navigate("/join-volunteer")}
+              className="btn bg-primary text-white px-6 py-3 rounded-lg border-none hover:scale-105 transition-transform"
+            >
+              Join as Volunteer
+            </button>
 
-        <div className="flex flex-col sm:flex-row gap-6">
-          
-          <button
-            onClick={() => navigate("/help-others")}
-            className="btn border-none text-white bg-gradient-to-br from-green-400 to-blue-600 
-            hover:bg-gradient-to-bl focus:ring-4 focus:outline-none 
-            focus:ring-green-200 dark:focus:ring-green-800 
-            font-medium rounded-base text-sm px-6 py-3 text-center leading-5"
-          >
-             I Want Help
-          </button>
-
-          <button
-            onClick={() => navigate("/get-help")}
-            className="btn border-none text-white bg-gradient-to-r from-red-400 via-red-500 to-red-600 
-            hover:bg-gradient-to-br focus:ring-4 focus:outline-none 
-            focus:ring-red-300 dark:focus:ring-red-800 
-            shadow-lg shadow-red-500/50 
-            font-medium rounded-base text-sm px-6 py-3 text-center leading-5"
-          >
-             I Need Help
-          </button>
-
+            <button
+              onClick={() => navigate("/partner")}
+              className="btn border border-white text-white bg-transparent px-6 py-3 rounded-lg hover:bg-white hover:text-secondary transition-colors"
+            >
+              Partner with Us
+            </button>
+          </div>
         </div>
       </div>
     </section>

@@ -5,6 +5,7 @@ import TestimonialsSection from '../Testimonials/TestimonialsSection';
 import Footer from '../../../Shared/Footer';
 import LiveCampaigns from '../LiveCampaigns/LiveCampaigns';
 import HowItWorks from '../HowItWorks/HowItWorks';
+import CallToAction from '../CallToAction/CallToAction';
 
 const Home = () => {
     return (
@@ -13,7 +14,7 @@ const Home = () => {
             <ServiceCard></ServiceCard>
             <LiveCampaigns></LiveCampaigns>
             <HowItWorks></HowItWorks>
-            {/* <CallToAction></CallToAction> */}
+            <CallToAction></CallToAction>
             <TestimonialsSection></TestimonialsSection>
             <Footer></Footer>
         </div>
