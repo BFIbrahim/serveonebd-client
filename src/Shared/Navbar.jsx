@@ -28,7 +28,7 @@ const Navbar = () => {
                             {links}
                         </ul>
                     </div>
-                    <a className="text-2xl font-bold bg-gradient-to-br from-green-400 to-blue-600 hover:from-blue-600 hover:to-green-400 text-transparent bg-clip-text  rounded-base px-4 py-2.5 text-center leading-5">SERVEONEBD</a>
+                    <a className="text-secondary text-xl font-bold">SERVEONE<span className='text-primary'>BD</span></a>
                 </div>
                 <div className="navbar-center hidden lg:flex">
                     <ul className="menu menu-horizontal px-1">
@@ -36,7 +36,7 @@ const Navbar = () => {
                     </ul>
                 </div>
                 <div className="navbar-end">
-                    <a type='button' className="text-white bg-gradient-to-br from-green-400 to-blue-600 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800 font-medium rounded-base text-sm px-4 py-2.5 text-center leading-5 btn">Login</a>
+                    <a type='button' className="btn bg-primary text-white">Login</a>
                 </div>
             </div>
         </div>

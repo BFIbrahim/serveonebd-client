@@ -1,76 +1,59 @@
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay, EffectFade } from "swiper/modules";
-
-import "swiper/css";
-import "swiper/css/effect-fade";
 import { useNavigate } from "react-router";
-
-const slides = [
-  "https://i.ibb.co.com/b5YC1v59/Chat-GPT-Image-Dec-23-2025-10-08-50-PM.png",
-  "https://i.ibb.co.com/ds4X3pJD/Gemini-Generated-Image-rnmwsirnmwsirnmw.png",
-  "https://i.ibb.co.com/27TqmGhv/Chat-GPT-Image-Dec-23-2025-10-26-20-PM.png",
-];
 
 const Banner = () => {
   const navigate = useNavigate();
 
   return (
-    <section className="relative h-[90vh] w-full">
-      <Swiper
-        modules={[Autoplay, EffectFade]}
-        effect="fade"
-        autoplay={{ delay: 3000 }}
-        loop
-        className="h-full w-full"
-      >
-        {slides.map((img, index) => (
-          <SwiperSlide key={index}>
-            <div
-              className="h-full w-full bg-cover bg-center"
-              style={{ backgroundImage: `url(${img})` }}
-            />
-          </SwiperSlide>
-        ))}
-      </Swiper>
+    <section className="w-full bg-gray-100">
+      <div className="container mx-auto flex flex-col-reverse md:flex-row items-center md:justify-between py-16 px-6 md:px-12 gap-10">
 
-      <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/60 to-black/80 z-10" />
+        <div className="flex-1 flex flex-col gap-6">
+          <h1 className="text-4xl md:text-5xl font-bold">
+            <span className="text-primary">Help</span> & <span className="text-secondary">Support</span>  
+          </h1>
 
-      <div className="absolute inset-0 z-20 flex flex-col justify-center items-center text-center px-6 text-white">
-        
-        <h1 className="text-2xl md:text-4xl font-bold mb-6 max-w-4xl 
-          bg-gradient-to-br from-green-400 to-blue-600 
-          hover:from-blue-600 hover:to-green-400 
-          text-transparent bg-clip-text">
-          Connecting People Who Need Help With People Who Want to Help
-        </h1>
+          <p className="text-gray-700 text-lg md:text-xl max-w-lg">
+            Connect with people and provide essential support like medicine, food, and clothing.
+          </p>
 
-        <p className="text-lg md:text-2xl mb-10 text-gray-200">
-          Medicine • Food • Clothing support in one platform
-        </p>
+          <div className="flex flex-col sm:flex-row gap-4">
+            <button
+              onClick={() => navigate("/help-others")}
+              className="btn btn-primary text-white px-8 py-3 rounded-lg"
+            >
+              I Want Help
+            </button>
 
-        <div className="flex flex-col sm:flex-row gap-6">
-          
-          <button
-            onClick={() => navigate("/help-others")}
-            className="btn border-none text-white bg-gradient-to-br from-green-400 to-blue-600 
-            hover:bg-gradient-to-bl focus:ring-4 focus:outline-none 
-            focus:ring-green-200 dark:focus:ring-green-800 
-            font-medium rounded-base text-sm px-6 py-3 text-center leading-5"
-          >
-             I Want Help
-          </button>
+            <button
+              onClick={() => navigate("/get-help")}
+              className="btn btn-secondary text-white px-8 py-3 rounded-lg"
+            >
+              I Need Help
+            </button>
+          </div>
 
-          <button
-            onClick={() => navigate("/get-help")}
-            className="btn border-none text-white bg-gradient-to-r from-red-400 via-red-500 to-red-600 
-            hover:bg-gradient-to-br focus:ring-4 focus:outline-none 
-            focus:ring-red-300 dark:focus:ring-red-800 
-            shadow-lg shadow-red-500/50 
-            font-medium rounded-base text-sm px-6 py-3 text-center leading-5"
-          >
-             I Need Help
-          </button>
+          <div className="mt-6 flex flex-wrap gap-6">
+            <div className="flex flex-col items-start border-r-2 border-gray-400 pr-4">
+              <span className="text-primary font-bold text-xl">3k+</span>
+              <span className="text-gray-600">People Helped</span>
+            </div>
+            <div className="flex flex-col items-start border-r-2 border-gray-400 pr-4">
+              <span className="text-primary font-bold text-xl">500+</span>
+              <span className="text-gray-600">Volunteers</span>
+            </div>
+            <div className="flex flex-col items-start">
+              <span className="text-primary font-bold text-xl">100+</span>
+              <span className="text-gray-600">Projects Completed</span>
+            </div>
+          </div>
+        </div>
 
+        <div className="flex-1">
+          <img
+            src="https://i.ibb.co.com/b5YC1v59/Chat-GPT-Image-Dec-23-2025-10-08-50-PM.png"
+            alt="Helping Hands"
+            className="w-full h-auto rounded-lg shadow-lg"
+          />
         </div>
       </div>
     </section>

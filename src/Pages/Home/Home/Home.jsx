@@ -1,18 +1,17 @@
 import React from 'react';
 import Banner from '../Banner/Banner';
 import ServiceCard from '../ServiceCard/ServiceCard';
-import ImpactSection from '../ImpactSection/ImpactSection';
-import CallToAction from '../CallToAction/CallToAction';
 import TestimonialsSection from '../Testimonials/TestimonialsSection';
 import Footer from '../../../Shared/Footer';
+import LiveCampaigns from '../LiveCampaigns/LiveCampaigns';
 
 const Home = () => {
     return (
         <div>
             <Banner></Banner>
             <ServiceCard></ServiceCard>
-            <ImpactSection></ImpactSection>
-            <CallToAction></CallToAction>
+            <LiveCampaigns></LiveCampaigns>
+            {/* <CallToAction></CallToAction> */}
             <TestimonialsSection></TestimonialsSection>
             <Footer></Footer>
         </div>
