@@ -6,6 +6,7 @@ import Footer from '../../../Shared/Footer';
 import LiveCampaigns from '../LiveCampaigns/LiveCampaigns';
 import HowItWorks from '../HowItWorks/HowItWorks';
 import CallToAction from '../CallToAction/CallToAction';
+import TrustFooter from '../TrustFooter/TrustFooter';
 
 const Home = () => {
     return (
@@ -16,6 +17,7 @@ const Home = () => {
             <HowItWorks></HowItWorks>
             <CallToAction></CallToAction>
             <TestimonialsSection></TestimonialsSection>
+            <TrustFooter></TrustFooter>
             <Footer></Footer>
         </div>
     );
