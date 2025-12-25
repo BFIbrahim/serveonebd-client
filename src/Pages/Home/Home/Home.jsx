@@ -2,7 +2,6 @@ import React from 'react';
 import Banner from '../Banner/Banner';
 import ServiceCard from '../ServiceCard/ServiceCard';
 import TestimonialsSection from '../Testimonials/TestimonialsSection';
-import Footer from '../../../Shared/Footer';
 import LiveCampaigns from '../LiveCampaigns/LiveCampaigns';
 import HowItWorks from '../HowItWorks/HowItWorks';
 import CallToAction from '../CallToAction/CallToAction';
@@ -18,7 +17,7 @@ const Home = () => {
             <CallToAction></CallToAction>
             <TestimonialsSection></TestimonialsSection>
             <TrustFooter></TrustFooter>
-            <Footer></Footer>
+            
         </div>
     );
 };
