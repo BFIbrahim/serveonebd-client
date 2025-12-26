@@ -3,6 +3,9 @@ import RootLayout from "../Layouts/RootLayout";
 import Home from "../Pages/Home/Home/Home";
 import GetHelp from "../Pages/GetHelp/GetHelp/GetHelp";
 import HelpOther from "../Pages/HelpOther/HelpOther/HelpOther";
+import WorkProcess from "../Pages/HowItWorks/WorkProcess";
+import AuthLayout from "../Layouts/AuthLayout";
+import Login from "../Pages/Authentication/Login";
 
 export const router = createBrowserRouter([
   {
@@ -20,7 +23,21 @@ export const router = createBrowserRouter([
         {
           path: 'help-other',
           Component: HelpOther
+        },
+        {
+          path: 'work-process',
+          Component: WorkProcess
         }
     ]
   },
+  {
+    path: 'login',
+    Component: AuthLayout,
+    children: [
+      {
+        index: true,
+        Component: Login
+      }
+    ]
+  }
 ]);
