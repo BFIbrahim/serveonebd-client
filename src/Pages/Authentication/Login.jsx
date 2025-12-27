@@ -32,7 +32,7 @@ const Login = () => {
                             type="email"
                             placeholder="Email"
                             {...register("email", { required: "Email is required" })}
-                            className="input w-full text-base-content border-none"
+                            className="input w-full text-base-content border-none bg-gray-100"
                         />
                         {errors.email && (
                             <span className="text-red-500 text-sm">{errors.email.message}</span>
@@ -41,7 +41,7 @@ const Login = () => {
                             type="password"
                             placeholder="Password"
                             {...register("password", { required: "Password is required" })}
-                            className="input w-full text-base-content border-none"
+                            className="input w-full text-base-content border-none bg-gray-100"
                         />
                         {errors.password && (
                             <span className="text-red-500 text-sm">{errors.password.message}</span>
@@ -63,9 +63,9 @@ const Login = () => {
                     </button>
                     <p className="text-center md:text-left text-accent mt-4">
                         Don't have an account?{" "}
-                        <span className="text-primary font-semibold cursor-pointer hover:underline">
+                        <Link to="register" className="text-primary font-semibold cursor-pointer hover:underline">
                             Sign Up
-                        </span>
+                        </Link>
                     </p>
                 </div>
                 <div className="w-full md:w-2/4 p-4 flex justify-center items-center">

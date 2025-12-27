@@ -6,6 +6,7 @@ import HelpOther from "../Pages/HelpOther/HelpOther/HelpOther";
 import WorkProcess from "../Pages/HowItWorks/WorkProcess";
 import AuthLayout from "../Layouts/AuthLayout";
 import Login from "../Pages/Authentication/Login";
+import Register from "../Pages/Authentication/Register";
 
 export const router = createBrowserRouter([
   {
@@ -37,6 +38,10 @@ export const router = createBrowserRouter([
       {
         index: true,
         Component: Login
+      },
+      {
+        path: 'register',
+        Component: Register
       }
     ]
   }
