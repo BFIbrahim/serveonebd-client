@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
+import useAxiosSecure from '../../../hooks/useAxiosSecure';
+import Swal from 'sweetalert2';
 
 const GetHelpForm = () => {
   const [category, setCategory] = useState('Medicine');
-  
+
   const { register, handleSubmit, reset, formState: { errors } } = useForm({
     defaultValues: {
       urgency: 'Normal',
@@ -13,9 +15,22 @@ const GetHelpForm = () => {
     }
   });
 
+  const axiosSecure = useAxiosSecure()
+
   const onSubmit = (data) => {
     const finalData = { ...data, category };
     console.log('Form Data:', finalData);
+    axiosSecure.post('/requests', finalData)
+      .then(res => {
+        console.log(res.data)
+        if (res.data.insertedId) {
+          Swal.fire({
+            title: "Request sent successfull",
+            text: "",
+            icon: "success"
+          });
+        }
+      })
     reset();
   };
 
@@ -39,7 +54,7 @@ const GetHelpForm = () => {
                   checked={category === item}
                   onChange={() => {
                     setCategory(item);
-                    reset({ urgency: 'Normal' }); 
+                    reset({ urgency: 'Normal' });
                   }}
                 />
               ))}
@@ -51,21 +66,21 @@ const GetHelpForm = () => {
               <div className="grid grid-cols-1 gap-4 animate-in fade-in duration-300">
                 <div className="form-control">
                   <label className="label">Medicine Names</label>
-                  <input 
+                  <input
                     {...register("medicineNames", { required: "Medicine name is required" })}
-                    type="text" 
-                    placeholder="e.g. Paracetamol" 
-                    className={`input input-bordered focus:border-primary block w-full mt-2 ${errors.medicineNames ? 'input-error' : ''}`} 
+                    type="text"
+                    placeholder="e.g. Paracetamol"
+                    className={`input input-bordered focus:border-primary block w-full mt-2 ${errors.medicineNames ? 'input-error' : ''}`}
                   />
                   {errors.medicineNames && <span className="text-error text-sm mt-1">{errors.medicineNames.message}</span>}
                 </div>
                 <div className="form-control">
                   <label className="label">Quantity / Duration</label>
-                  <input 
+                  <input
                     {...register("quantityDuration")}
-                    type="text" 
-                    placeholder="e.g. 2 strips or 5 days" 
-                    className="input input-bordered focus:border-primary block w-full mt-2" 
+                    type="text"
+                    placeholder="e.g. 2 strips or 5 days"
+                    className="input input-bordered focus:border-primary block w-full mt-2"
                   />
                 </div>
               </div>
@@ -75,10 +90,10 @@ const GetHelpForm = () => {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 animate-in fade-in duration-300">
                 <div className="form-control">
                   <label className="label">Number of meals / people</label>
-                  <input 
+                  <input
                     {...register("mealCount", { required: "Required", min: 1 })}
-                    type="number" 
-                    className={`input input-bordered focus:border-primary ${errors.mealCount ? 'input-error' : ''}`} 
+                    type="number"
+                    className={`input input-bordered focus:border-primary ${errors.mealCount ? 'input-error' : ''}`}
                   />
                 </div>
                 <div className="form-control">
@@ -114,10 +129,10 @@ const GetHelpForm = () => {
                 </div>
                 <div className="form-control md:col-span-2">
                   <label className="label">Quantity</label>
-                  <input 
+                  <input
                     {...register("clothingQuantity", { min: 1 })}
-                    type="number" 
-                    className="input input-bordered focus:border-primary block w-full mt-2" 
+                    type="number"
+                    className="input input-bordered focus:border-primary block w-full mt-2"
                   />
                 </div>
               </div>
@@ -128,11 +143,11 @@ const GetHelpForm = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div className="form-control">
                 <label className="label">Location</label>
-                <input 
+                <input
                   {...register("location", { required: "Location is required" })}
-                  type="text" 
-                  placeholder="Enter area or city" 
-                  className={`input input-bordered focus:border-primary ${errors.location ? 'input-error' : ''}`} 
+                  type="text"
+                  placeholder="Enter area or city"
+                  className={`input input-bordered focus:border-primary ${errors.location ? 'input-error' : ''}`}
                 />
                 {errors.location && <span className="text-error text-sm mt-1">{errors.location.message}</span>}
               </div>
@@ -146,7 +161,7 @@ const GetHelpForm = () => {
             </div>
 
             <button type="submit" className="btn btn-primary w-full mt-8 text-white text-lg">
-               Submit Request
+              Submit Request
             </button>
           </form>
         </div>

@@ -24,10 +24,12 @@ const Navbar = () => {
 
     const links = <>
         <li><NavLink to="/">Home</NavLink></li>
-        <li><NavLink to="/get-help">Get Help</NavLink></li>
+        {
+            user ? <li><NavLink to="/get-help">Get Help</NavLink></li> : <li><NavLink to="/login">Get Help</NavLink></li> 
+        }
         <li><NavLink to="/help-other">Help Others</NavLink></li>
         <li><NavLink to="/work-process">How It Works</NavLink></li>
-        <li><NavLink to="/">Dashboard</NavLink></li>
+        <li><NavLink to="/dashboard">Dashboard</NavLink></li>
     </>
 
     return (
