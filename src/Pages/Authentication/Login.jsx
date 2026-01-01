@@ -1,7 +1,10 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import { FcGoogle } from "react-icons/fc";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
+import GoogleLogin from "./GoogleLogin";
+import useAuth from "../../hooks/useAuth";
+import Swal from "sweetalert2";
 
 const Login = () => {
     const {
@@ -10,13 +13,27 @@ const Login = () => {
         formState: { errors },
     } = useForm();
 
+    const { signIn } = useAuth()
+    const navigate = useNavigate()
+
+
     const onSubmit = (data) => {
         console.log(data);
+        signIn(data.email, data.password)
+            .then(result => {
+                console.log(result.user)
+                Swal.fire({
+                    title: "Welcome Back",
+                    text: "Login Successfull",
+                    icon: "success"
+                });
+                navigate('/')
+            })
+            .catch(error => {
+                console.log(error)
+            })
     };
 
-    const handleGoogleSignIn = () => {
-        console.log("Google Sign In clicked");
-    };
 
     return (
         <div className="min-h-screen flex items-center justify-center bg-gray-50">
@@ -54,13 +71,7 @@ const Login = () => {
                         </button>
                     </form>
                     <div className="divider">OR</div>
-                    <button
-                        onClick={handleGoogleSignIn}
-                        className="btn btn-outline w-full mt-4 flex items-center justify-center gap-2 text-base-content border-secondary hover:border-primary hover:text-primary"
-                    >
-                        <FcGoogle size={20} />
-                        Sign in with Google
-                    </button>
+                    <GoogleLogin></GoogleLogin>
                     <p className="text-center md:text-left text-accent mt-4">
                         Don't have an account?{" "}
                         <Link to="register" className="text-primary font-semibold cursor-pointer hover:underline">

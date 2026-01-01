@@ -1,7 +1,26 @@
 import React from 'react';
 import { Link, NavLink } from 'react-router';
+import useAuth from '../hooks/useAuth';
+import Swal from 'sweetalert2';
 
 const Navbar = () => {
+
+    const { logOut, user } = useAuth()
+
+    const hundleLogout = () => {
+        logOut()
+            .then(result => {
+                console.log(result)
+                Swal.fire({
+                    title: "Logout",
+                    text: "User successfully loggedOut",
+                    icon: "success"
+                });
+            })
+            .catch(error => {
+                console.log(error)
+            })
+    }
 
     const links = <>
         <li><NavLink to="/">Home</NavLink></li>
@@ -36,7 +55,10 @@ const Navbar = () => {
                     </ul>
                 </div>
                 <div className="navbar-end">
-                    <Link to="/login" type='button' className="btn bg-primary text-white">Login</Link>
+                    {
+                        user ? <Link onClick={hundleLogout} type='button' className="btn bg-primary text-white">Logout</Link> : <Link to="/login" type='button' className="btn bg-primary text-white">Login</Link>
+
+                    }
                 </div>
             </div>
         </div>

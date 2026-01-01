@@ -1,7 +1,10 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import { FcGoogle } from "react-icons/fc";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
+import useAuth from "../../hooks/useAuth";
+import GoogleLogin from "./GoogleLogin";
+import Swal from "sweetalert2";
 
 const Register = () => {
   const {
@@ -10,13 +13,27 @@ const Register = () => {
     formState: { errors },
   } = useForm();
 
+  const { createUser } = useAuth()
+  const navigate = useNavigate()
+
   const onSubmit = (data) => {
     console.log(data);
+    console.log(createUser)
+    createUser(data.email, data.password)
+      .then(result => {
+        console.log(result.user)
+        Swal.fire({
+          title: "Welcome",
+          text: "Registration Sucessfull",
+          icon: "success"
+        });
+        navigate('/')
+      })
+      .catch(err => {
+        console.log(err)
+      })
   };
 
-  const handleGoogleSignIn = () => {
-    console.log("Google Sign Up clicked");
-  };
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50">
@@ -73,13 +90,7 @@ const Register = () => {
 
           <div className="divider">OR</div>
 
-          <button
-            onClick={handleGoogleSignIn}
-            className="btn btn-outline w-full mt-4 flex items-center justify-center gap-2 text-base-content border-secondary hover:border-primary hover:text-primary"
-          >
-            <FcGoogle size={20} />
-            Sign up with Google
-          </button>
+          <GoogleLogin></GoogleLogin>
 
           <p className="text-center md:text-left text-accent mt-4">
             Already have an account?{" "}
