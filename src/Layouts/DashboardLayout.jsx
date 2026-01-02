@@ -1,6 +1,10 @@
 import React from 'react';
-import { Link } from 'react-router';
+import { Link, Outlet } from 'react-router';
 import { AiOutlineHome } from "react-icons/ai";
+import { MdOutlinePendingActions } from "react-icons/md";
+import { IoIosListBox } from "react-icons/io";
+
+
 
 
 const DashboardLayout = () => {
@@ -20,7 +24,9 @@ const DashboardLayout = () => {
                         </div>
                     </nav>
                     {/* Page content here */}
-                    <div className="p-4">Page Content</div>
+                    <div className="p-4">
+                        <Outlet></Outlet>
+                    </div>
                 </div>
 
                 <div className="drawer-side is-drawer-close:overflow-visible">
@@ -31,9 +37,18 @@ const DashboardLayout = () => {
                             {/* List item */}
                             <li>
                                 <Link to="/" className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Homepage">
-                                    {/* Home icon */}
                                     <AiOutlineHome className='text-xl'/>
                                     <span className="is-drawer-close:hidden">Homepage</span>
+                                </Link>
+
+                                <Link to="/dashboard/mybookings" className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="My Bookings">
+                                    <IoIosListBox className='text-xl'/>
+                                    <span className="is-drawer-close:hidden">My Bookings</span>
+                                </Link>
+
+                                <Link to="/dashboard/pending-requests" className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Pending Requests">
+                                    <MdOutlinePendingActions className='text-xl'/>
+                                    <span className="is-drawer-close:hidden">PendingRequests</span>
                                 </Link>
                             </li>
                         </ul>

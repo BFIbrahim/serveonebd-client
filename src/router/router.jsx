@@ -9,6 +9,8 @@ import Login from "../Pages/Authentication/Login";
 import Register from "../Pages/Authentication/Register";
 import PrivetRoute from "../routes/PrivetRoute";
 import DashboardLayout from "../Layouts/DashboardLayout";
+import PendingRequests from "../Pages/Dashboard/PendingRequests/PendingRequests";
+import MyBookings from "../Pages/Dashboard/MyBookings/MyBookings";
 
 export const router = createBrowserRouter([
   {
@@ -53,7 +55,14 @@ export const router = createBrowserRouter([
       <DashboardLayout></DashboardLayout>
     </PrivetRoute>,
     children: [
-      
+      {
+        path: 'pending-requests',
+        Component: PendingRequests
+      },
+      {
+        path: 'mybookings',
+        Component: MyBookings
+      }
     ]
   }
 ]);

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import useAxiosSecure from '../../../hooks/useAxiosSecure';
 import Swal from 'sweetalert2';
+import useAuth from '../../../hooks/useAuth';
 
 const GetHelpForm = () => {
   const [category, setCategory] = useState('Medicine');
@@ -16,9 +17,11 @@ const GetHelpForm = () => {
   });
 
   const axiosSecure = useAxiosSecure()
+  const {user} = useAuth()
+  console.log(user.email)
 
   const onSubmit = (data) => {
-    const finalData = { ...data, category };
+    const finalData = { ...data, category, email: user.email};
     console.log('Form Data:', finalData);
     axiosSecure.post('/requests', finalData)
       .then(res => {
