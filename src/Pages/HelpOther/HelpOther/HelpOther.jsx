@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { FaPills, FaUtensils, FaTshirt, FaMapMarkerAlt, FaRegClock, FaSearch, FaFilter } from 'react-icons/fa';
 import { IoCheckmarkCircle, IoBagHandle, IoChevronForwardOutline } from 'react-icons/io5';
+import HelpRequestCard from '../../../Components/HelpRequestCard';
 
 const HelpOther = () => {
   const [filter, setFilter] = useState('All');
@@ -20,29 +21,21 @@ const HelpOther = () => {
     setSelectedRequest(null);
   };
 
-  const getIcon = (cat) => {
-    switch (cat) {
-      case 'Medicine': return <FaPills />;
-      case 'Food': return <FaUtensils />;
-      case 'Clothing': return <FaTshirt />;
-      default: return null;
-    }
-  };
 
   return (
     <div className="min-h-screen bg-base-200 py-8 px-4">
       <div className="max-w-6xl mx-auto">
-        
+
         <header className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
           <div>
             <h2 className="text-3xl font-bold text-secondary">Help Others</h2>
             <p className="text-accent">Find people nearby who need your support</p>
           </div>
-          
+
           <div className="flex flex-wrap gap-2">
             {['All', 'Medicine', 'Food', 'Clothing'].map((cat) => (
-              <button 
-                key={cat} 
+              <button
+                key={cat}
                 onClick={() => setFilter(cat)}
                 className={`btn btn-sm rounded-full ${filter === cat ? 'btn-primary text-white' : 'btn-ghost bg-base-100 shadow-sm'}`}
               >
@@ -53,50 +46,16 @@ const HelpOther = () => {
         </header>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {filteredRequests.map((request) => (
-            <div key={request.id} className="card bg-base-100 shadow-xl border border-base-300 relative overflow-hidden group">
-              {matchedIds.includes(request.id) && (
-                <div className="absolute inset-0 bg-primary/90 z-10 flex flex-col items-center justify-center text-white animate-in fade-in zoom-in duration-300">
-                  <IoCheckmarkCircle className="text-6xl mb-2" />
-                  <span className="text-xl font-bold">Matched</span>
-                </div>
-              )}
-
-              <div className="card-body p-6">
-                <div className="flex justify-between mb-4">
-                  <div className={`flex items-center gap-2 px-3 py-1 rounded-lg text-white text-xs font-bold uppercase ${
-                    request.category === 'Medicine' ? 'bg-blue-600' : request.category === 'Food' ? 'bg-orange-500' : 'bg-purple-600'
-                  }`}>
-                    {getIcon(request.category)} {request.category}
-                  </div>
-                  <span className={`badge badge-sm font-bold ${request.urgency === 'Urgent' ? 'badge-error' : 'badge-ghost'}`}>
-                    {request.urgency}
-                  </span>
-                </div>
-
-                <h3 className="text-xl font-bold text-secondary h-14 line-clamp-2">{request.items}</h3>
-                
-                <div className="space-y-2 mt-4 text-sm">
-                  <div className="flex items-center gap-2 text-accent">
-                    <FaRegClock className="text-primary" /> {request.details}
-                  </div>
-                  <div className="flex items-center gap-2 text-secondary font-medium">
-                    <FaMapMarkerAlt className="text-primary" /> {request.location}
-                  </div>
-                </div>
-
-                <div className="card-actions mt-6 pt-4 border-t border-base-200">
-                  <button 
-                    onClick={() => setSelectedRequest(request)}
-                    className="btn btn-primary w-full text-white"
-                  >
-                     I Can Help
-                  </button>
-                </div>
-              </div>
-            </div>
+          {filteredRequests.map(request => (
+            <HelpRequestCard
+              key={request.id}
+              request={request}
+              matched={matchedIds.includes(request.id)}
+              onHelpClick={(req) => setSelectedRequest(req)}
+            />
           ))}
         </div>
+
 
         {selectedRequest && (
           <div className="modal modal-open">
@@ -111,14 +70,14 @@ const HelpOther = () => {
                 <p className="text-sm text-gray-500 italic">How would you like to provide this help?</p>
               </div>
               <div className="flex flex-col gap-3">
-                <button 
+                <button
                   onClick={() => handleAction(selectedRequest.id)}
                   className="btn btn-primary text-white flex justify-between items-center"
                 >
                   <div className="flex items-center gap-2"> I Will Deliver / Buy</div>
                   <IoChevronForwardOutline />
                 </button>
-                <button 
+                <button
                   onClick={() => handleAction(selectedRequest.id)}
                   className="btn btn-outline border-secondary text-secondary flex justify-between items-center"
                 >

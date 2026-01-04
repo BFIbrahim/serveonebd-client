@@ -42,6 +42,7 @@ const MyBookings = () => {
                     confirmButtonColor: '#2dc653',
                 });
 
+                setSelectedBooking(null);
                 refetch();
 
             } catch (error) {
@@ -217,7 +218,7 @@ const MyBookings = () => {
                                 <div className="flex items-center gap-2">Mark as Completed</div>
                                 <IoChevronForwardOutline />
                             </button>
-                            <button className="btn btn-outline border-secondary text-secondary flex justify-between items-center">
+                            <button onClick={ () => handleDelete(selectedBooking._id)} className="btn btn-outline border-secondary text-secondary flex justify-between items-center">
                                 <div className="flex items-center gap-2">Cancel Booking</div>
                                 <IoBagHandle className="text-xl" />
                             </button>
