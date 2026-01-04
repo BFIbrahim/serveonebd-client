@@ -29,7 +29,7 @@ const Navbar = () => {
         }
         <li><NavLink to="/help-other">Help Others</NavLink></li>
         <li><NavLink to="/work-process">How It Works</NavLink></li>
-        <li><NavLink to="/dashboard">Dashboard</NavLink></li>
+        <li><NavLink to="/dashboard/mybookings">Dashboard</NavLink></li>
     </>
 
     return (

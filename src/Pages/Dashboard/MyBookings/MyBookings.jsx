@@ -3,12 +3,13 @@ import React, { useState } from 'react';
 import { IoChevronForwardOutline, IoBagHandle } from 'react-icons/io5';
 import useAuth from '../../../hooks/useAuth';
 import useAxiosSecure from '../../../hooks/useAxiosSecure';
+import Swal from 'sweetalert2';
 
 const MyBookings = () => {
     const { user } = useAuth();
     const axiosSecure = useAxiosSecure();
 
-    const { data: mybookings = [] } = useQuery({
+    const { data: mybookings = [], refetch } = useQuery({
         queryKey: ['mybookings', user?.email],
         queryFn: async () => {
             const res = await axiosSecure.get(`/requests/email?email=${user.email}`);
@@ -18,9 +19,42 @@ const MyBookings = () => {
 
     const [selectedBooking, setSelectedBooking] = useState(null);
 
-    const handleDelete = async () => {
+    const handleDelete = async (id) => {
+        const result = await Swal.fire({
+            title: 'Are you sure?',
+            text: "This booking will be permanently deleted!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#2dc653', // primary
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it',
+            cancelButtonText: 'Cancel',
+        });
 
+        if (result.isConfirmed) {
+            try {
+                await axiosSecure.delete(`/requests/${id}`);
+
+                Swal.fire({
+                    title: 'Deleted!',
+                    text: 'Your booking has been deleted.',
+                    icon: 'success',
+                    confirmButtonColor: '#2dc653',
+                });
+
+                refetch();
+
+            } catch (error) {
+                Swal.fire({
+                    title: 'Error!',
+                    text: 'Something went wrong. Please try again.',
+                    icon: 'error',
+                });
+                console.error(error);
+            }
+        }
     };
+
 
     const getStatusBadge = (status) => {
         switch (status) {
