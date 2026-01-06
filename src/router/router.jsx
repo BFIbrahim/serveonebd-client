@@ -11,6 +11,7 @@ import PrivetRoute from "../routes/PrivetRoute";
 import DashboardLayout from "../Layouts/DashboardLayout";
 import PendingRequests from "../Pages/Dashboard/PendingRequests/PendingRequests";
 import MyBookings from "../Pages/Dashboard/MyBookings/MyBookings";
+import BeAvolunteer from "../Pages/Dashboard/BeAvolunteer/BeAvolunteer";
 
 export const router = createBrowserRouter([
   {
@@ -62,6 +63,10 @@ export const router = createBrowserRouter([
       {
         path: 'mybookings',
         Component: MyBookings
+      },
+      {
+        path: 'be-volunteer',
+        Component: BeAvolunteer
       }
     ]
   }

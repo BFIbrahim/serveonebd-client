@@ -3,6 +3,8 @@ import { Link, Outlet } from 'react-router';
 import { AiOutlineHome } from "react-icons/ai";
 import { MdOutlinePendingActions } from "react-icons/md";
 import { IoIosListBox } from "react-icons/io";
+import { FaHandHoldingHeart } from "react-icons/fa";
+
 
 
 
@@ -49,6 +51,11 @@ const DashboardLayout = () => {
                                 <Link to="/dashboard/pending-requests" className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Pending Requests">
                                     <MdOutlinePendingActions className='text-xl'/>
                                     <span className="is-drawer-close:hidden">PendingRequests</span>
+                                </Link>
+
+                                <Link to="/dashboard/be-volunteer" className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Be a Volunteer">
+                                    <FaHandHoldingHeart className='text-xl'/>
+                                    <span className="is-drawer-close:hidden">Be a Volunteer</span>
                                 </Link>
                             </li>
                         </ul>

@@ -5,6 +5,7 @@ import { Link, useNavigate } from "react-router";
 import useAuth from "../../hooks/useAuth";
 import GoogleLogin from "./GoogleLogin";
 import Swal from "sweetalert2";
+import useAxios from "../../hooks/useAxios";
 
 const Register = () => {
   const {
@@ -13,26 +14,41 @@ const Register = () => {
     formState: { errors },
   } = useForm();
 
-  const { createUser } = useAuth()
+  const { createUser, updateUserProfile } = useAuth()
   const navigate = useNavigate()
+const axios = useAxios()
 
   const onSubmit = (data) => {
     console.log(data);
     console.log(createUser)
     createUser(data.email, data.password)
-      .then(result => {
-        console.log(result.user)
-        Swal.fire({
-          title: "Welcome",
-          text: "Registration Sucessfull",
-          icon: "success"
-        });
-        navigate('/')
+      .then(async() => {
+
+        const userInfo = {
+          email: data.email,
+          role: 'user',
+          cretedAt: new Date().toISOString()
+        }
+
+        const userRes = await axios.post('/users', userInfo)
+        console.log(userRes.data)
+
+        updateUserProfile(data.name)
+          .then(() => {
+            Swal.fire({
+              title: "Welcome",
+              text: "Registration Successful",
+              icon: "success"
+            });
+            navigate('/');
+          });
       })
       .catch(err => {
         console.log(err)
       })
   };
+
+
 
 
   return (

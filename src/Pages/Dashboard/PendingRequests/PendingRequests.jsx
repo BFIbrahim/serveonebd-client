@@ -8,7 +8,6 @@ const PendingRequests = () => {
   const axiosSecure = useAxiosSecure();
   const [selectedRequest, setSelectedRequest] = useState(null);
 
-  // Fetch pending requests
   const { data: requests = [], refetch } = useQuery({
     queryKey: ['pending-requests'],
     queryFn: async () => {
@@ -17,19 +16,18 @@ const PendingRequests = () => {
     },
   });
 
-  // Handle status change
   const handleStatusChange = async (id, status) => {
     try {
       await axiosSecure.patch(`/requests/${id}/status`, { status });
       Swal.fire('Updated!', `Request has been ${status}`, 'success');
       refetch();
+      setSelectedRequest(null)
     } catch (error) {
       Swal.fire('Error!', 'Something went wrong', 'error');
       console.log(error)
     }
   };
 
-  // Handle assign volunteer
   const handleAssignVolunteer = (id) => {
     Swal.fire({
       title: 'Assign Volunteer',
@@ -54,7 +52,6 @@ const PendingRequests = () => {
     });
   };
 
-  // Badge based on urgency
   const getUrgencyBadge = (urgency) => {
     switch (urgency) {
       case 'Urgent':
@@ -70,7 +67,6 @@ const PendingRequests = () => {
     <div className="p-4 md:p-8 min-h-screen bg-base-100">
       <h2 className="text-2xl font-semibold text-secondary mb-6">Pending Requests</h2>
 
-      {/* Desktop Table */}
       <div className="hidden md:block overflow-x-auto bg-white rounded-xl shadow">
         <table className="table table-zebra w-full">
           <thead className="bg-secondary text-white">
@@ -127,7 +123,6 @@ const PendingRequests = () => {
         </table>
       </div>
 
-      {/* Mobile Cards */}
       <div className="md:hidden space-y-4">
         {requests.length > 0 ? (
           requests.map((req) => (
@@ -165,7 +160,6 @@ const PendingRequests = () => {
         )}
       </div>
 
-      {/* Modal with actions */}
       {selectedRequest && (
         <div className="modal modal-open">
           <div className="modal-box border-t-8 border-primary max-w-md">
