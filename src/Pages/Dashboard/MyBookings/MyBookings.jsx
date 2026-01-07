@@ -17,6 +17,8 @@ const MyBookings = () => {
         },
     });
 
+    console.log(user.accessToken)
+
     const [selectedBooking, setSelectedBooking] = useState(null);
 
     const handleDelete = async (id) => {
