@@ -12,6 +12,7 @@ import DashboardLayout from "../Layouts/DashboardLayout";
 import PendingRequests from "../Pages/Dashboard/PendingRequests/PendingRequests";
 import MyBookings from "../Pages/Dashboard/MyBookings/MyBookings";
 import BeAvolunteer from "../Pages/Dashboard/BeAvolunteer/BeAvolunteer";
+import PendingVolunteers from "../Pages/Dashboard/PendingVolunteers/PendingVolunteers";
 
 export const router = createBrowserRouter([
   {
@@ -67,6 +68,10 @@ export const router = createBrowserRouter([
       {
         path: 'be-volunteer',
         Component: BeAvolunteer
+      },
+      {
+        path: "pending-volunteers",
+        Component: PendingVolunteers
       }
     ]
   }

@@ -17,7 +17,6 @@ const MyBookings = () => {
         },
     });
 
-    console.log(user.accessToken)
 
     const [selectedBooking, setSelectedBooking] = useState(null);
 

@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import useAuth from '../../../hooks/useAuth';
+import useAxiosSecure from '../../../hooks/useAxiosSecure';
+import Swal from 'sweetalert2';
 
 
 const BeAvolunteer = () => {
   const { user } = useAuth();
-  console.log(user)
+  const axiosSecure = useAxiosSecure()
 
   const [formData, setFormData] = useState({
     phone: '',
@@ -26,10 +28,44 @@ const BeAvolunteer = () => {
       email: user?.email,
       phone: formData.phone,
       location: formData.location,
+      status: 'pending',
+      createdAt: new Date().toISOString()
     };
 
+    axiosSecure.post('/volunteers', volunteerInfo)
+      .then(result => {
+        
+        if (result.data.insertedId) {
+          Swal.fire({
+            title: "Request Submitted!",
+            text: "Thank you for signing up as a volunteer. We appreciate your support!",
+            icon: "success",
+            confirmButtonText: "Awesome!"
+          });
+        }
+      })
+      .catch(error => {
+        if (error.response && error.response.status === 409) {
+          Swal.fire({
+            title: "Already Submitted!",
+            text: "You have already submitted a volunteer request.",
+            icon: "warning",
+            confirmButtonText: "OK"
+          });
+        } else {
+
+          Swal.fire({
+            title: "Something went wrong",
+            text: "Please try again later.",
+            icon: "error",
+            confirmButtonText: "OK"
+          });
+        }
+      });
+
     console.log(volunteerInfo);
-    
+
+
   };
 
   return (

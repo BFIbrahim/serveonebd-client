@@ -67,55 +67,71 @@ const PendingRequests = () => {
     <div className="p-4 md:p-8 min-h-screen bg-base-100">
       <h2 className="text-2xl font-semibold text-secondary mb-6">Pending Requests</h2>
 
-      <div className="hidden md:block overflow-x-auto bg-white rounded-xl shadow">
-        <table className="table table-zebra w-full">
+      <div className="hidden md:block overflow-x-auto rounded-xl border border-base-300 bg-base-100 shadow-sm">
+        <table className="table w-full">
           <thead className="bg-secondary text-white">
             <tr>
-              <th>#</th>
+              <th className="rounded-tl-xl">#</th>
               <th>Category</th>
               <th>Urgency</th>
               <th>Location</th>
-              <th>Quantity/Details</th>
+              <th>Quantity / Details</th>
               <th>Date</th>
               <th>Status</th>
-              <th className="text-center">Action</th>
+              <th className="text-center rounded-tr-xl">Action</th>
             </tr>
           </thead>
+
           <tbody>
             {requests.length > 0 ? (
               requests.map((req, idx) => (
-                <tr key={req._id}>
+                <tr key={req._id} className="hover">
                   <td>{idx + 1}</td>
-                  <td className="font-medium">{req.category}</td>
+
+                  <td className="font-semibold">{req.category}</td>
+
                   <td>
-                    <span className={`${getUrgencyBadge(req.urgency)} capitalize`}>{req.urgency}</span>
+                    <span className={`${getUrgencyBadge(req.urgency)} badge-sm`}>
+                      {req.urgency}
+                    </span>
                   </td>
+
                   <td>{req.location}</td>
+
                   <td>
                     {req.category === 'Medicine'
                       ? req.quantityDuration
                       : req.category === 'Clothing'
-                      ? req.clothingQuantity
-                      : req.category === 'Food'
-                      ? req.mealCount
-                      : '-'}
+                        ? req.clothingQuantity
+                        : req.category === 'Food'
+                          ? req.mealCount
+                          : '-'}
                   </td>
-                  <td>{new Date(req.createdAt).toLocaleDateString()}</td>
-                  <td className="capitalize">{req.status}</td>
+
+                  <td className="text-sm">
+                    {new Date(req.createdAt).toLocaleDateString()}
+                  </td>
+
+                  <td>
+                    <span className="badge badge-outline capitalize">
+                      {req.status}
+                    </span>
+                  </td>
+
                   <td className="text-center">
                     <button
                       onClick={() => setSelectedRequest(req)}
                       className="btn btn-sm btn-primary text-white"
                     >
-                      View Details
+                      View
                     </button>
                   </td>
                 </tr>
               ))
             ) : (
               <tr>
-                <td colSpan="8" className="text-center py-6 text-gray-500">
-                  No pending requests
+                <td colSpan="8" className="text-center py-10 text-gray-400">
+                  No pending requests found
                 </td>
               </tr>
             )}
@@ -139,10 +155,10 @@ const PendingRequests = () => {
                 {req.category === 'Medicine'
                   ? req.quantityDuration
                   : req.category === 'Clothing'
-                  ? req.clothingQuantity
-                  : req.category === 'Food'
-                  ? req.mealCount
-                  : '-'}
+                    ? req.clothingQuantity
+                    : req.category === 'Food'
+                      ? req.mealCount
+                      : '-'}
               </p>
               <p>
                 <strong>Status:</strong> {req.status}
@@ -177,10 +193,10 @@ const PendingRequests = () => {
                 {selectedRequest.category === 'Medicine'
                   ? selectedRequest.quantityDuration
                   : selectedRequest.category === 'Clothing'
-                  ? selectedRequest.clothingQuantity
-                  : selectedRequest.category === 'Food'
-                  ? selectedRequest.mealCount
-                  : '-'}
+                    ? selectedRequest.clothingQuantity
+                    : selectedRequest.category === 'Food'
+                      ? selectedRequest.mealCount
+                      : '-'}
               </p>
               <p>
                 <strong>Status:</strong> {selectedRequest.status}

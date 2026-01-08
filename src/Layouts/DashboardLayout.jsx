@@ -3,7 +3,7 @@ import { Link, Outlet } from 'react-router';
 import { AiOutlineHome } from "react-icons/ai";
 import { MdOutlinePendingActions } from "react-icons/md";
 import { IoIosListBox } from "react-icons/io";
-import { FaHandHoldingHeart } from "react-icons/fa";
+import { FaHandHoldingHeart, FaUserCheck, FaUserClock } from "react-icons/fa";
 
 
 
@@ -39,23 +39,40 @@ const DashboardLayout = () => {
                             {/* List item */}
                             <li>
                                 <Link to="/" className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Homepage">
-                                    <AiOutlineHome className='text-xl'/>
+                                    <AiOutlineHome className='text-xl' />
                                     <span className="is-drawer-close:hidden">Homepage</span>
                                 </Link>
 
                                 <Link to="/dashboard/mybookings" className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="My Bookings">
-                                    <IoIosListBox className='text-xl'/>
+                                    <IoIosListBox className='text-xl' />
                                     <span className="is-drawer-close:hidden">My Bookings</span>
                                 </Link>
 
                                 <Link to="/dashboard/pending-requests" className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Pending Requests">
-                                    <MdOutlinePendingActions className='text-xl'/>
+                                    <MdOutlinePendingActions className='text-xl' />
                                     <span className="is-drawer-close:hidden">PendingRequests</span>
                                 </Link>
 
                                 <Link to="/dashboard/be-volunteer" className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Be a Volunteer">
-                                    <FaHandHoldingHeart className='text-xl'/>
+                                    <FaHandHoldingHeart className='text-xl' />
                                     <span className="is-drawer-close:hidden">Be a Volunteer</span>
+                                </Link>
+                                <Link
+                                    to="/dashboard/pending-volunteers"
+                                    className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
+                                    data-tip="Pending Volunteers"
+                                >
+                                    <FaUserClock className="text-xl" />
+                                    <span className="is-drawer-close:hidden">Pending Volunteers</span>
+                                </Link>
+
+                                <Link
+                                    to="/dashboard/active-volunteers"
+                                    className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
+                                    data-tip="Active Volunteers"
+                                >
+                                    <FaUserCheck className="text-xl" />
+                                    <span className="is-drawer-close:hidden">Active Volunteers</span>
                                 </Link>
                             </li>
                         </ul>
