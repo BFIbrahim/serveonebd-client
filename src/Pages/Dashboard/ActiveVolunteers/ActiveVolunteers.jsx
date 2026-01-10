@@ -14,32 +14,40 @@ const ActiveVolunteers = () => {
   } = useQuery({
     queryKey: ["activeVolunteers"],
     queryFn: async () => {
-      const res = await axiosSecure.get("/users/role/volunteer");
+      const res = await axiosSecure.get("/volunteers/approved");
       return res.data;
     },
   });
 
-  const handleReject = async (userId) => {
-    Swal.fire({
+
+  const handleReject = async (id, email) => {
+    const result = await Swal.fire({
       title: "Are you sure?",
-      text: "This volunteer will be changed back to a regular user.",
+      text: "This volunteer will be rejected and role will be reverted to user.",
       icon: "warning",
       showCancelButton: true,
       confirmButtonColor: "#ef4444",
-      confirmButtonText: "Yes, reject",
-    }).then(async (result) => {
-      if (result.isConfirmed) {
-        try {
-          await axiosSecure.patch(`/users/${userId}/role`, { role: "user" });
-          Swal.fire("Updated!", "Volunteer is now a regular user.", "success");
-          refetch();
-        } catch (error) {
-          Swal.fire("Error", "Failed to update role.", "error");
-          console.error(error);
-        }
-      }
+      cancelButtonColor: "#6b7280",
+      confirmButtonText: "Yes, Reject",
+      cancelButtonText: "Cancel",
     });
+
+    if (!result.isConfirmed) return;
+
+    try {
+      await axiosSecure.patch(`/volunteers/${id}/status`, {
+        status: "rejected",
+        email,
+      });
+
+      Swal.fire("Rejected!", "Volunteer rejected successfully.", "success");
+      refetch();
+    } catch (error) {
+      Swal.fire("Error", "Failed to reject volunteer", "error");
+      console.log(error);
+    }
   };
+
 
   const filteredVolunteers = volunteers.filter((v) =>
     v.name.toLowerCase().includes(searchTerm.toLowerCase())
@@ -88,7 +96,7 @@ const ActiveVolunteers = () => {
                   <td>{new Date(v.createdAt).toLocaleDateString()}</td>
                   <td className="flex gap-2">
                     <button
-                      onClick={() => handleReject(v._id)}
+                      onClick={() => handleReject(v._id, v.email)}
                       className="btn btn-sm btn-error text-white"
                     >
                       Reject
@@ -129,7 +137,7 @@ const ActiveVolunteers = () => {
 
               <div className="flex gap-2 mt-4">
                 <button
-                  onClick={() => handleReject(v._id)}
+                  onClick={() => handleReject(v._id, v.email)}
                   className="btn btn-sm btn-error text-white w-full"
                 >
                   Reject
