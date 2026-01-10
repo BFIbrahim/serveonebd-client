@@ -4,8 +4,15 @@ import { AiOutlineHome } from "react-icons/ai";
 import { MdOutlinePendingActions } from "react-icons/md";
 import { IoIosListBox } from "react-icons/io";
 import { FaHandHoldingHeart, FaUserCheck, FaUserClock } from "react-icons/fa";
+import useUserRole from '../hooks/useUserRole';
+import { MdAddBox } from "react-icons/md";
+
 
 const DashboardLayout = () => {
+
+    const { role } = useUserRole()
+    console.log(role)
+
     return (
         <div>
             <div className="drawer lg:drawer-open">
@@ -44,33 +51,50 @@ const DashboardLayout = () => {
                                     <span className="is-drawer-close:hidden">My Bookings</span>
                                 </Link>
 
-                                <Link to="/dashboard/be-volunteer" className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Be a Volunteer">
-                                    <FaHandHoldingHeart className='text-xl' />
-                                    <span className="is-drawer-close:hidden">Be a Volunteer</span>
-                                </Link>
+                                {
+                                    (role === 'volunteer' || role === "admin") ? "" : (
+                                        <Link to="/dashboard/be-volunteer" className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Be a Volunteer">
+                                            <FaHandHoldingHeart className='text-xl' />
+                                            <span className="is-drawer-close:hidden">Be a Volunteer</span>
+                                        </Link>
+                                    )
+                                }
 
-                                <Link to="/dashboard/pending-requests" className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Pending Requests">
-                                    <MdOutlinePendingActions className='text-xl' />
-                                    <span className="is-drawer-close:hidden">PendingRequests</span>
-                                </Link>
-                                
-                                <Link
-                                    to="/dashboard/pending-volunteers"
-                                    className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
-                                    data-tip="Pending Volunteers"
-                                >
-                                    <FaUserClock className="text-xl" />
-                                    <span className="is-drawer-close:hidden">Pending Volunteers</span>
-                                </Link>
+                                {
+                                    (role === 'volunteer' || role === 'admin') ? (<Link to="/dashboard/pending-requests" className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Pending Requests">
+                                        <MdOutlinePendingActions className='text-xl' />
+                                        <span className="is-drawer-close:hidden">PendingRequests</span>
+                                    </Link>) : ""
+                                }
 
-                                <Link
-                                    to="/dashboard/active-volunteers"
-                                    className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
-                                    data-tip="Active Volunteers"
-                                >
-                                    <FaUserCheck className="text-xl" />
-                                    <span className="is-drawer-close:hidden">Active Volunteers</span>
-                                </Link>
+                                {
+                                    (role === 'admin' || role === 'volunteer') ? <Link to="/dashboard/addNew-campaign" className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Add New Campaign">
+                                        <MdAddBox className='text-xl' />
+                                        <span className="is-drawer-close:hidden">Add New Campaign</span>
+                                    </Link> : ""
+                                }
+
+                                {
+                                    role === 'admin' ? <Link
+                                        to="/dashboard/pending-volunteers"
+                                        className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
+                                        data-tip="Pending Volunteers"
+                                    >
+                                        <FaUserClock className="text-xl" />
+                                        <span className="is-drawer-close:hidden">Pending Volunteers</span>
+                                    </Link> : ""
+                                }
+
+                                {
+                                    role === 'admin' ? <Link
+                                        to="/dashboard/active-volunteers"
+                                        className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
+                                        data-tip="Active Volunteers"
+                                    >
+                                        <FaUserCheck className="text-xl" />
+                                        <span className="is-drawer-close:hidden">Active Volunteers</span>
+                                    </Link> : ""
+                                }
                             </li>
                         </ul>
                     </div>

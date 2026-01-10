@@ -16,6 +16,7 @@ import PendingVolunteers from "../Pages/Dashboard/PendingVolunteers/PendingVolun
 import Forbidden from "../Pages/Forbidden/Forbidden";
 import AdminRoute from "../routes/AdminRoute";
 import ActiveVolunteers from "../Pages/Dashboard/ActiveVolunteers/ActiveVolunteers";
+import AddNewCampaign from "../Pages/Dashboard/AddNewCampaign/AddNewCampaign";
 
 export const router = createBrowserRouter([
   {
@@ -58,7 +59,7 @@ export const router = createBrowserRouter([
     ),
     children: [
       { index: true, element: <MyBookings /> },
-      { path: "pending-requests", element: <AdminRoute><PendingRequests /></AdminRoute>},
+      { path: "pending-requests", element: <PendingRequests />},
       { path: "be-volunteer", element: <BeAvolunteer /> },
       {
         path: "pending-volunteers",
@@ -67,6 +68,10 @@ export const router = createBrowserRouter([
             <PendingVolunteers />
           </AdminRoute>
         )
+      },
+      {
+        path: 'addNew-campaign',
+        element: <AddNewCampaign></AddNewCampaign>
       },
       {
         path: 'active-volunteers',
