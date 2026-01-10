@@ -43,7 +43,7 @@ const DashboardLayout = () => {
                                     <span className="is-drawer-close:hidden">Homepage</span>
                                 </Link>
 
-                                <Link to="/dashboard/mybookings" className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="My Bookings">
+                                <Link to="/dashboard" className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="My Bookings">
                                     <IoIosListBox className='text-xl' />
                                     <span className="is-drawer-close:hidden">My Bookings</span>
                                 </Link>

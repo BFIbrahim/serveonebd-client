@@ -13,65 +13,69 @@ import PendingRequests from "../Pages/Dashboard/PendingRequests/PendingRequests"
 import MyBookings from "../Pages/Dashboard/MyBookings/MyBookings";
 import BeAvolunteer from "../Pages/Dashboard/BeAvolunteer/BeAvolunteer";
 import PendingVolunteers from "../Pages/Dashboard/PendingVolunteers/PendingVolunteers";
+import Forbidden from "../Pages/Forbidden/Forbidden";
+import AdminRoute from "../routes/AdminRoute";
+import ActiveVolunteers from "../Pages/Dashboard/ActiveVolunteers/ActiveVolunteers";
 
 export const router = createBrowserRouter([
   {
     path: "/",
-    Component: RootLayout,
+    element: <RootLayout />,
     children: [
-        {
-            index: true,
-            Component: Home
-        },
-        {
-          path: 'get-help',
-          Component: GetHelp
-        },
-        {
-          path: 'help-other',
-          Component: HelpOther
-        },
-        {
-          path: 'work-process',
-          Component: WorkProcess
-        }
+      { index: true, element: <Home /> },
+
+      {
+        path: "get-help",
+        element: (
+          <PrivetRoute>
+            <GetHelp />
+          </PrivetRoute>
+        )
+      },
+
+      { path: "help-other", element: <HelpOther /> },
+      { path: "work-process", element: <WorkProcess /> }
     ]
   },
   {
-    path: 'login',
-    Component: AuthLayout,
+    path: "login",
+    element: <AuthLayout />,
     children: [
-      {
-        index: true,
-        Component: Login
-      },
-      {
-        path: 'register',
-        Component: Register
-      }
+      { index: true, element: <Login /> },
+      { path: "register", element: <Register /> }
     ]
   },
   {
-    path: '/dashboard',
-    element: <PrivetRoute>
-      <DashboardLayout></DashboardLayout>
-    </PrivetRoute>,
+    path: "forbidden",
+    element: <Forbidden />
+  },
+  {
+    path: "dashboard",
+    element: (
+      <PrivetRoute>
+        <DashboardLayout />
+      </PrivetRoute>
+    ),
     children: [
-      {
-        path: 'pending-requests',
-        Component: PendingRequests
-      },
-      {
-        path: 'mybookings',
-        Component: MyBookings
-      },
-      {
-        path: 'be-volunteer',
-        Component: BeAvolunteer
-      },
+      { index: true, element: <MyBookings /> },
+      { path: "pending-requests", element: <PendingRequests /> },
+      { path: "be-volunteer", element: <BeAvolunteer /> },
       {
         path: "pending-volunteers",
-        Component: PendingVolunteers
+        element: (
+          <AdminRoute>
+            <PendingVolunteers />
+          </AdminRoute>
+        )
+      },
+      {
+        path: 'active-volunteers',
+        element:(
+          <AdminRoute>
+            <ActiveVolunteers />
+          </AdminRoute>
+        ) 
+      
       }
     ]
   }

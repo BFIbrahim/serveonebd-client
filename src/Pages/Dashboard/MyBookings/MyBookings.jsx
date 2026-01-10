@@ -8,6 +8,7 @@ import Swal from 'sweetalert2';
 const MyBookings = () => {
     const { user } = useAuth();
     const axiosSecure = useAxiosSecure();
+    console.log(user)
 
     const { data: mybookings = [], refetch } = useQuery({
         queryKey: ['mybookings', user?.email],
@@ -57,17 +58,59 @@ const MyBookings = () => {
         }
     };
 
+    const handleMarkCompleted = async (id) => {
+        try {
+            const result = await Swal.fire({
+                title: 'Mark as Completed?',
+                text: "This will mark the booking as completed.",
+                icon: 'question',
+                showCancelButton: true,
+                confirmButtonColor: '#2dc653',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, complete it',
+                cancelButtonText: 'Cancel',
+            });
+
+            if (result.isConfirmed) {
+                await axiosSecure.patch(`/requests/${id}/status`, { status: 'completed' });
+
+                Swal.fire({
+                    title: 'Updated!',
+                    text: 'The booking has been marked as completed.',
+                    icon: 'success',
+                    confirmButtonColor: '#2dc653',
+                });
+
+                refetch();
+                setSelectedBooking(null);
+            }
+
+        } catch (error) {
+            console.error(error);
+            Swal.fire({
+                title: 'Error!',
+                text: 'Something went wrong. Please try again.',
+                icon: 'error',
+            });
+        }
+    };
+
+
 
     const getStatusBadge = (status) => {
         switch (status) {
             case 'pending':
-                return 'badge badge-warning';
+                return 'badge badge-warning text-white font-semibold';
             case 'approved':
-                return 'badge badge-success';
+                return 'badge badge-success text-white font-semibold';
             case 'rejected':
-                return 'badge badge-error';
+                return 'badge badge-error text-white font-semibold';
+            case 'matched':
+                return 'badge badge-success text-white font-semibold';
+            case 'completed':
+                return 'badge badge-success text-white font-semibold';
             default:
-                return 'badge badge-ghost';
+                return 'badge badge-ghost text-white font-semibold';
         }
     };
 
@@ -215,11 +258,15 @@ const MyBookings = () => {
                         </div>
 
                         <div className="flex flex-col gap-3">
-                            <button className="btn btn-primary text-white flex justify-between items-center">
+                            <button
+                                onClick={() => handleMarkCompleted(selectedBooking._id)}
+                                className="btn btn-primary text-white flex justify-between items-center"
+                            >
                                 <div className="flex items-center gap-2">Mark as Completed</div>
                                 <IoChevronForwardOutline />
                             </button>
-                            <button onClick={ () => handleDelete(selectedBooking._id)} className="btn btn-outline border-secondary text-secondary flex justify-between items-center">
+
+                            <button onClick={() => handleDelete(selectedBooking._id)} className="btn btn-outline border-secondary text-secondary flex justify-between items-center">
                                 <div className="flex items-center gap-2">Cancel Booking</div>
                                 <IoBagHandle className="text-xl" />
                             </button>

@@ -18,10 +18,12 @@ const PendingVolunteers = () => {
     },
   });
 
-  const handleApprove = async (id) => {
+
+  const handleApprove = async (id, email) => {
     try {
       await axiosSecure.patch(`/volunteers/${id}/status`, {
         status: "approved",
+        email: email
       });
       Swal.fire("Approved!", "Volunteer has been approved.", "success");
       refetch();
@@ -90,7 +92,7 @@ const PendingVolunteers = () => {
                   <td className="text-center">
                     <div className="flex justify-center gap-2">
                       <button
-                        onClick={() => handleApprove(v._id)}
+                        onClick={() => handleApprove(v._id, v.email)}
                         className="btn btn-xs btn-success text-white"
                       >
                         Approve
@@ -99,7 +101,7 @@ const PendingVolunteers = () => {
                         onClick={() => handleRemove(v._id)}
                         className="btn btn-xs btn-error text-white"
                       >
-                        Remove
+                        Reject
                       </button>
                     </div>
                   </td>
@@ -143,7 +145,7 @@ const PendingVolunteers = () => {
 
             <div className="grid grid-cols-2 gap-2 mt-4">
               <button
-                onClick={() => handleApprove(v._id)}
+                onClick={() => handleApprove(v._id, v.email)}
                 className="btn btn-sm btn-success text-white w-full"
               >
                 Approve
@@ -152,7 +154,7 @@ const PendingVolunteers = () => {
                 onClick={() => handleRemove(v._id)}
                 className="btn btn-sm btn-error text-white w-full"
               >
-                Remove
+                Reject
               </button>
             </div>
           </div>
