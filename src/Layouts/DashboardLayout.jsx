@@ -7,6 +7,7 @@ import { FaHandHoldingHeart, FaUserCheck, FaUserClock } from "react-icons/fa";
 import useUserRole from '../hooks/useUserRole';
 import { MdAddBox } from "react-icons/md";
 import { HiOutlineClipboardList } from "react-icons/hi";
+import { MdOutlineCampaign } from "react-icons/md";
 
 
 const DashboardLayout = () => {
@@ -51,6 +52,17 @@ const DashboardLayout = () => {
                                     <IoIosListBox className='text-xl' />
                                     <span className="is-drawer-close:hidden">My Bookings</span>
                                 </Link>
+
+                                {
+                                    (role === 'admin' || role === 'volunteer') ? (<Link
+                                        to="/dashboard/my-campaigns"
+                                        className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
+                                        data-tip="My Campaigns"
+                                    >
+                                        <MdOutlineCampaign className="text-xl" />
+                                        <span className="is-drawer-close:hidden">My Campaigns</span>
+                                    </Link>) : ""
+                                }
 
                                 {
                                     (role === 'volunteer' || role === "admin") ? "" : (
