@@ -17,6 +17,7 @@ import Forbidden from "../Pages/Forbidden/Forbidden";
 import AdminRoute from "../routes/AdminRoute";
 import ActiveVolunteers from "../Pages/Dashboard/ActiveVolunteers/ActiveVolunteers";
 import AddNewCampaign from "../Pages/Dashboard/AddNewCampaign/AddNewCampaign";
+import PendingCampaign from "../Pages/Dashboard/PendingCampaign/PendingCampaign";
 
 export const router = createBrowserRouter([
   {
@@ -81,6 +82,14 @@ export const router = createBrowserRouter([
           </AdminRoute>
         ) 
       
+      },
+      {
+        path: 'pending-campaigns',
+        element: (
+          <AdminRoute>
+              <PendingCampaign />
+          </AdminRoute>
+        )
       }
     ]
   }

@@ -18,7 +18,9 @@ const AddNewCampaign = () => {
   const onSubmit = async (data) => {
     const campaignData = {
       ...data,
-      email: user?.email,
+      createdBy: user?.email,
+      createdAt: new Date().toISOString(),
+      status: 'pending'
     };
 
     try {
