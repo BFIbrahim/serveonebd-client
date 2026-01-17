@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router";
+import Typewriter from 'typewriter-effect';
 
 const Banner = () => {
   const navigate = useNavigate();
@@ -9,7 +10,18 @@ const Banner = () => {
 
         <div className="flex-1 flex flex-col gap-6">
           <h1 className="text-4xl md:text-5xl font-bold">
-            <span className="text-primary">Help</span> & <span className="text-secondary">Support</span>  
+            <Typewriter
+              options={{
+                strings: ['<span class="text-primary">Help</span> & <span class="text-secondary">Support</span>',
+                  '<span class="text-primary">Kindness</span> in <span class="text-secondary">Action</span>',
+                  '<span class="text-primary">Every</span> Help <span class="text-secondary">Matters</span>'
+
+                ],
+                autoStart: true,
+                loop: true,
+              }}
+            />
+
           </h1>
 
           <p className="text-gray-700 text-lg md:text-xl max-w-lg">
