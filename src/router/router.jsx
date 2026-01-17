@@ -19,6 +19,7 @@ import ActiveVolunteers from "../Pages/Dashboard/ActiveVolunteers/ActiveVoluntee
 import AddNewCampaign from "../Pages/Dashboard/AddNewCampaign/AddNewCampaign";
 import PendingCampaign from "../Pages/Dashboard/PendingCampaign/PendingCampaign";
 import MyCampaigns from "../Pages/Dashboard/MyCampaigns/MyCampaigns";
+import UrgentCampaign from "../Pages/Dashboard/UrgetCampaign/UrgentCampaign";
 
 export const router = createBrowserRouter([
   {
@@ -92,7 +93,15 @@ export const router = createBrowserRouter([
           </AdminRoute>
         )
       },
-      { path: 'my-campaigns', element: <MyCampaigns></MyCampaigns> }
+      { path: 'my-campaigns', element: <MyCampaigns></MyCampaigns> },
+      {
+        path: 'urget-campaign',
+        element: (
+          <AdminRoute>
+            <UrgentCampaign></UrgentCampaign>
+          </AdminRoute>
+        )
+      }
 
     ]
   }
