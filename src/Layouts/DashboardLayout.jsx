@@ -74,7 +74,7 @@ const DashboardLayout = () => {
                                 }
 
                                 {
-                                    (role === 'volunteer' || role === 'admin') ? (<Link to="/dashboard/pending-requests" className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Pending Requests">
+                                    (role === 'admin') ? (<Link to="/dashboard/pending-requests" className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Pending Requests">
                                         <MdOutlinePendingActions className='text-xl' />
                                         <span className="is-drawer-close:hidden">PendingRequests</span>
                                     </Link>) : ""

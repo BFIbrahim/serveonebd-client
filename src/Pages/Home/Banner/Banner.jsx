@@ -1,6 +1,9 @@
 import { useNavigate } from "react-router";
 import Typewriter from 'typewriter-effect';
 
+import "swiper/css";
+import "swiper/css/effect-fade";
+
 const Banner = () => {
   const navigate = useNavigate();
 
@@ -46,7 +49,7 @@ const Banner = () => {
 
           <div className="mt-6 flex flex-wrap gap-6">
             <div className="flex flex-col items-start border-r-2 border-gray-400 pr-4">
-              <span className="text-primary font-bold text-xl">3k+</span>
+              <span className="text-primary font-bold text-xl">3000+</span>
               <span className="text-gray-600">People Helped</span>
             </div>
             <div className="flex flex-col items-start border-r-2 border-gray-400 pr-4">
