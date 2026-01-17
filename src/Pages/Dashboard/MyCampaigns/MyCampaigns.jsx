@@ -1,5 +1,5 @@
 import Swal from "sweetalert2";
-import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import useAuth from "../../../hooks/useAuth";
 
@@ -16,65 +16,50 @@ const MyCampaigns = () => {
         },
     });
 
-    const updateCampaignMutation = useMutation({
-        mutationFn: async ({ id, status }) => {
-            return axiosSecure.patch(`/campaigns/${id}/status`, { status });
-        },
-        onSuccess: () => {
-            queryClient.invalidateQueries(["myCampaigns", user.email]);
-        },
-    });
-
-    const deleteCampaignMutation = useMutation({
-        mutationFn: async (id) => {
-            return axiosSecure.delete(`/campaigns/${id}`);
-        },
-        onSuccess: () => {
-            queryClient.invalidateQueries(["myCampaigns", user.email]);
-        },
-    });
-
-    const handleAction = async (campaign, action) => {
-        let actionText = "";
-        let status = "";
-
-        if (action === "completed") {
-            actionText = "Mark as Completed";
-            status = "completed";
-        } else if (action === "urgent") {
-            actionText = "Mark as Urgent";
-            status = "urgent";
-        } else if (action === "delete") {
-            actionText = "Delete";
-        }
-
+    const handleDelete = async (id) => {
         const result = await Swal.fire({
             title: "Are you sure?",
-            text: `Do you want to ${actionText.toLowerCase()} this campaign?`,
+            text: "You won't be able to revert this!",
             icon: "warning",
             showCancelButton: true,
-            confirmButtonColor: action === "delete" ? "#dc2626" : "#2dc653",
+            confirmButtonColor: "#dc2626",
             cancelButtonColor: "#6c757d",
-            confirmButtonText: `Yes, ${actionText}`,
+            confirmButtonText: "Yes, delete it!",
         });
 
         if (result.isConfirmed) {
-            if (action === "delete") {
-                await deleteCampaignMutation.mutateAsync(campaign._id);
-                Swal.fire({
-                    icon: "success",
-                    title: "Deleted Successfully",
-                    text: `Campaign "${campaign.title}" has been deleted.`,
-                    confirmButtonColor: "#2dc653",
-                });
-            } else {
-                await updateCampaignMutation.mutateAsync({ id: campaign._id, status });
-                Swal.fire({
-                    icon: "success",
-                    title: `${actionText} Successfully`,
-                    text: `Campaign "${campaign.title}" has been ${actionText.toLowerCase()}.`,
-                    confirmButtonColor: "#2dc653",
-                });
+            try {
+                const res = await axiosSecure.delete(`/campaigns/${id}`);
+                if (res.data) {
+                    queryClient.invalidateQueries(["myCampaigns", user.email]);
+                    Swal.fire("Deleted!", "Your campaign has been deleted.", "success");
+                }
+            } catch (err) {
+                Swal.fire("Error", "Failed to delete campaign", "error");
+                console.log(err)
+            }
+        }
+    };
+
+    const handleUpdateStatus = async (id, newStatus) => {
+        const result = await Swal.fire({
+            title: `Mark as ${newStatus}?`,
+            icon: "question",
+            showCancelButton: true,
+            confirmButtonColor: "#2dc653",
+            confirmButtonText: "Yes, update it!",
+        });
+
+        if (result.isConfirmed) {
+            try {
+                const res = await axiosSecure.patch(`/campaigns/${id}/status`, { status: newStatus });
+                if (res.data) {
+                    queryClient.invalidateQueries(["myCampaigns", user.email]);
+                    Swal.fire("Updated!", `Campaign is now ${newStatus}.`, "success");
+                }
+            } catch (err) {
+                Swal.fire("Error", "Failed to update status", "error");
+                console.log(err)
             }
         }
     };
@@ -89,9 +74,7 @@ const MyCampaigns = () => {
 
     return (
         <div className="p-4 md:p-6">
-            <h2 className="text-2xl font-bold text-secondary mb-6">
-                My Campaigns
-            </h2>
+            <h2 className="text-2xl font-bold text-secondary mb-6">My Campaigns</h2>
 
             <div className="hidden md:block bg-white rounded-xl shadow overflow-x-auto">
                 <table className="table w-full">
@@ -114,22 +97,26 @@ const MyCampaigns = () => {
                                 <td>{campaign.category}</td>
                                 <td>{campaign.location}</td>
                                 <td>{new Date(campaign.createdAt).toLocaleDateString()}</td>
-                                <td>{campaign.status}</td>
+                                <td>
+                                    <span className={`badge ${campaign.status === 'urgent' ? 'badge-warning' : 'badge-ghost'}`}>
+                                        {campaign.status}
+                                    </span>
+                                </td>
                                 <td className="flex gap-2">
                                     <button
-                                        onClick={() => handleAction(campaign, "completed")}
+                                        onClick={() => handleUpdateStatus(campaign._id, "completed")}
                                         className="btn btn-sm bg-primary text-white hover:bg-primary/90"
                                     >
-                                        Mark as Completed
+                                        Mark Completed
                                     </button>
                                     <button
-                                        onClick={() => handleAction(campaign, "urgent")}
+                                        onClick={() => handleUpdateStatus(campaign._id, "urgent")}
                                         className="btn btn-sm btn-warning text-white"
                                     >
                                         Mark Urgent
                                     </button>
                                     <button
-                                        onClick={() => handleAction(campaign, "delete")}
+                                        onClick={() => handleDelete(campaign._id)}
                                         className="btn btn-sm btn-error text-white"
                                     >
                                         Delete
@@ -143,41 +130,32 @@ const MyCampaigns = () => {
 
             <div className="grid gap-4 md:hidden">
                 {campaigns.map((campaign, index) => (
-                    <div
-                        key={campaign._id}
-                        className="card bg-white shadow-md border border-gray-100"
-                    >
+                    <div key={campaign._id} className="card bg-white shadow-md border border-gray-100">
                         <div className="card-body p-4">
                             <h3 className="font-bold text-lg text-secondary">
                                 {index + 1}. {campaign.title}
                             </h3>
                             <div className="text-sm space-y-1">
-                                <p>
-                                    <span className="font-semibold">Category:</span> {campaign.category}
-                                </p>
-                                <p>
-                                    <span className="font-semibold">Location:</span> {campaign.location}
-                                </p>
-                                <p>
-                                    <span className="font-semibold">Date:</span> {new Date(campaign.createdAt).toLocaleDateString()}
-                                </p>
+                                <p><span className="font-semibold">Category:</span> {campaign.category}</p>
+                                <p><span className="font-semibold">Status:</span> {campaign.status}</p>
+                                <p><span className="font-semibold">Date:</span> {new Date(campaign.createdAt).toLocaleDateString()}</p>
                             </div>
-                            <div className="flex gap-2 mt-3">
+                            <div className="flex flex-wrap gap-2 mt-3">
                                 <button
-                                    onClick={() => handleAction(campaign, "completed")}
-                                    className="btn btn-sm bg-primary text-white flex-1"
+                                    onClick={() => handleUpdateStatus(campaign._id, "completed")}
+                                    className="btn btn-xs bg-primary text-white flex-1"
                                 >
-                                    Mark as Completed
+                                    Completed
                                 </button>
                                 <button
-                                    onClick={() => handleAction(campaign, "urgent")}
-                                    className="btn btn-sm btn-warning text-white flex-1"
+                                    onClick={() => handleUpdateStatus(campaign._id, "urgent")}
+                                    className="btn btn-xs btn-warning text-white flex-1"
                                 >
-                                    Mark Urgent
+                                    Urgent
                                 </button>
                                 <button
-                                    onClick={() => handleAction(campaign, "delete")}
-                                    className="btn btn-sm btn-error text-white flex-1"
+                                    onClick={() => handleDelete(campaign._id)}
+                                    className="btn btn-xs btn-error text-white flex-1"
                                 >
                                     Delete
                                 </button>
