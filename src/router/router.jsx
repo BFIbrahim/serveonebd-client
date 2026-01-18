@@ -20,6 +20,7 @@ import AddNewCampaign from "../Pages/Dashboard/AddNewCampaign/AddNewCampaign";
 import PendingCampaign from "../Pages/Dashboard/PendingCampaign/PendingCampaign";
 import MyCampaigns from "../Pages/Dashboard/MyCampaigns/MyCampaigns";
 import UrgentCampaign from "../Pages/Dashboard/UrgetCampaign/UrgentCampaign";
+import Profile from "../Pages/Profile/Profile";
 
 export const router = createBrowserRouter([
   {
@@ -27,6 +28,7 @@ export const router = createBrowserRouter([
     element: <RootLayout />,
     children: [
       { index: true, element: <Home /> },
+      {path:'profile', element: <Profile></Profile>},
 
       {
         path: "get-help",
@@ -101,8 +103,7 @@ export const router = createBrowserRouter([
             <UrgentCampaign></UrgentCampaign>
           </AdminRoute>
         )
-      }
-
+      },
     ]
   }
 ]);
