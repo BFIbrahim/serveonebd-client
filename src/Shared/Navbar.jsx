@@ -9,9 +9,7 @@ import { GiWaterRecycling } from "react-icons/gi";
 import { MdOutlineSpaceDashboard } from "react-icons/md";
 import { IoMdLogIn } from "react-icons/io";
 import { RiLogoutCircleLine } from "react-icons/ri";
-
-
-
+import { FaUserCircle, FaTachometerAlt, FaHandsHelping } from "react-icons/fa";
 
 const Navbar = () => {
 
@@ -70,6 +68,10 @@ const Navbar = () => {
                     {
                         user ? <Link onClick={hundleLogout} type='button' className="btn bg-primary text-white"><RiLogoutCircleLine className='text-[20px]'/>Logout</Link> : <Link to="/login" type='button' className="btn bg-primary text-white"><IoMdLogIn className='text-[20px]' />Login</Link>
 
+                    }
+
+                    {
+                        user ? <Link to='/profile'><FaUserCircle className='text-3xl mx-3 text-secondary'></FaUserCircle></Link> : ""
                     }
                 </div>
             </div>
