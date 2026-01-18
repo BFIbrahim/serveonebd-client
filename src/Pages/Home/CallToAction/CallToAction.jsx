@@ -1,8 +1,7 @@
 import React from "react";
-import { useNavigate } from "react-router";
+import { Link } from "react-router";
 
 const CallToAction = () => {
-  const navigate = useNavigate();
 
   return (
     <section className="w-full bg-gradient-to-r from-[#041c38] to-[#02233f] py-[100px] px-6 md:px-20">
@@ -26,19 +25,9 @@ const CallToAction = () => {
           <p className="text-white">Join our community of passionate volunteers and partners to create real impact. Together, we can bring hope, support, and change to those who need it most.</p>
 
           <div className="flex flex-col sm:flex-row gap-4 mt-4">
-            <button
-              onClick={() => navigate("/join-volunteer")}
-              className="btn bg-primary text-white px-6 py-3 rounded-lg border-none hover:scale-105 transition-transform"
-            >
+            <Link to="/dashboard/be-volunteer" className="btn bg-primary text-white px-6 py-3 rounded-lg border-none hover:scale-105 transition-transform">
               Join as Volunteer
-            </button>
-
-            <button
-              onClick={() => navigate("/partner")}
-              className="btn border border-white text-white bg-transparent px-6 py-3 rounded-lg hover:bg-white hover:text-secondary transition-colors"
-            >
-              Partner with Us
-            </button>
+            </Link>
           </div>
         </div>
       </div>

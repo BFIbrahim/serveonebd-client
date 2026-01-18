@@ -65,7 +65,10 @@ export const router = createBrowserRouter([
     children: [
       { index: true, element: <MyBookings /> },
       { path: "pending-requests", element: <PendingRequests /> },
-      { path: "be-volunteer", element: <BeAvolunteer /> },
+      { 
+        path: "be-volunteer", 
+        element: <PrivetRoute><BeAvolunteer /></PrivetRoute> 
+      },
       {
         path: "pending-volunteers",
         element: (

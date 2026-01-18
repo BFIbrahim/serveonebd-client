@@ -54,7 +54,7 @@ const Profile = () => {
 
               {role === "user" && (
                 <Link
-                  to="/dashboard/be-a-volunteer"
+                  to="/dashboard/be-volunteer"
                   className="btn btn-outline btn-sm flex items-center gap-2"
                 >
                   <MdVolunteerActivism /> Be a Volunteer
