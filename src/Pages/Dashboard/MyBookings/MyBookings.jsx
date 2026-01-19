@@ -117,7 +117,12 @@ const MyBookings = () => {
 
     return (
         <div className="p-4 md:p-8 bg-base-100 min-h-screen">
-            <h2 className="text-2xl font-semibold text-secondary mb-6">My Bookings</h2>
+            <div className='md:flex justify-between items-center mb-6 md:mb-0 lg:mb-0'>
+                <h2 className="text-2xl font-semibold text-secondary mb-6">My Bookings</h2>
+
+                <Link to='/get-help' className='btn btn-primary text-white '>Add new request</Link>
+            </div>
+
 
             <div className="hidden md:block overflow-x-auto bg-white rounded-xl shadow">
                 <table className="table table-zebra w-full">
