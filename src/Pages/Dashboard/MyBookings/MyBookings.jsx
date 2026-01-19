@@ -4,6 +4,7 @@ import { IoChevronForwardOutline, IoBagHandle } from 'react-icons/io5';
 import useAuth from '../../../hooks/useAuth';
 import useAxiosSecure from '../../../hooks/useAxiosSecure';
 import Swal from 'sweetalert2';
+import { Link } from 'react-router';
 
 const MyBookings = () => {
     const { user } = useAuth();
@@ -175,7 +176,10 @@ const MyBookings = () => {
                         ) : (
                             <tr>
                                 <td colSpan="8" className="text-center py-6 text-gray-500">
-                                    No bookings found
+                                    <div>
+                                        <p className="text-center py-6 text-gray-500">No bookings found</p>
+                                        <Link to="/get-help" className='btn btn-primary text-white'>Add Help Requests</Link>
+                                    </div>
                                 </td>
                             </tr>
                         )}
@@ -219,7 +223,10 @@ const MyBookings = () => {
                         </div>
                     ))
                 ) : (
-                    <p className="text-center py-6 text-gray-500">No bookings found</p>
+                    <div>
+                        <p className="text-center py-6 text-gray-500">No bookings found</p>
+                        <Link to="/get-help" className='btn btn-primary text-white'>Help Requests</Link>
+                    </div>
                 )}
             </div>
 

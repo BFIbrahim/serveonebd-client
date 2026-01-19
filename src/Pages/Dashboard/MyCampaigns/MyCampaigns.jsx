@@ -98,37 +98,43 @@ const MyCampaigns = () => {
                                 <td>{campaign.location}</td>
                                 <td>{new Date(campaign.createdAt).toLocaleDateString()}</td>
                                 <td>
-                                    <span className={`badge ${campaign.status === 'urgent' ? 'badge-warning' : 'badge-ghost'}`}>
+                                    <span
+                                        className={`badge 
+                                        ${campaign.status === 'urgent' && 'badge-warning text-white'}
+                                        ${campaign.status === 'completed' && 'badge-primary text-white' }
+                                        ${campaign.status !== 'urgent' && campaign.status !== 'completed' && 'badge-ghost'}
+        `}
+                                    >
                                         {campaign.status}
                                     </span>
                                 </td>
                                 <td className="flex gap-2">
                                     {
                                         campaign.status === 'completed' ? <button
-                                        onClick={() => handleUpdateStatus(campaign._id, "completed")}
-                                        className="btn btn-disabled btn-sm bg-gray-200 text-gray-300 hover:bg-primary/90"
-                                    >
-                                        Completed
-                                    </button> : <button
-                                        onClick={() => handleUpdateStatus(campaign._id, "completed")}
-                                        className="btn btn-sm bg-primary text-white hover:bg-primary/90"
-                                    >
-                                        Mark Completed
-                                    </button>
+                                            onClick={() => handleUpdateStatus(campaign._id, "completed")}
+                                            className="btn btn-disabled btn-sm bg-gray-200 text-gray-300 hover:bg-primary/90"
+                                        >
+                                             Mark Completed
+                                        </button> : <button
+                                            onClick={() => handleUpdateStatus(campaign._id, "completed")}
+                                            className="btn btn-sm bg-primary text-white hover:bg-primary/90"
+                                        >
+                                            Mark Completed
+                                        </button>
                                     }
 
                                     {
-                                        campaign.status === 'completed' || campaign.status === 'approved' || campaign.status === 'urgent'  ? <button
-                                        onClick={() => handleUpdateStatus(campaign._id, "urgent")}
-                                        className="btn btn-disabled btn-sm bg-gray-200 text-gray-300"
-                                    >
-                                        Marked Urgent
-                                    </button> : <button
-                                        onClick={() => handleUpdateStatus(campaign._id, "urgent")}
-                                        className="btn btn-sm btn-warning text-white"
-                                    >
-                                        Mark Urgent
-                                    </button>
+                                        campaign.status === 'completed' || campaign.status === 'approved' || campaign.status === 'urgent' ? <button
+                                            onClick={() => handleUpdateStatus(campaign._id, "urgent")}
+                                            className="btn btn-disabled btn-sm bg-gray-200 text-gray-300"
+                                        >
+                                            Mark Urgent
+                                        </button> : <button
+                                            onClick={() => handleUpdateStatus(campaign._id, "urgent")}
+                                            className="btn btn-sm btn-warning text-white"
+                                        >
+                                            Mark Urgent
+                                        </button>
                                     }
                                     <button
                                         onClick={() => handleDelete(campaign._id)}
@@ -158,29 +164,29 @@ const MyCampaigns = () => {
                             <div className="flex flex-wrap gap-2 mt-3">
                                 {
                                     campaign.status === "completed" ? <button
-                                    onClick={() => handleUpdateStatus(campaign._id, "completed")}
-                                    className="btn btn-disabled btn-xs bg-gray-200 text-gray-300 text-white flex-1"
-                                >
-                                    Completed
-                                </button> : <button
-                                    onClick={() => handleUpdateStatus(campaign._id, "completed")}
-                                    className="btn btn-xs bg-primary text-white flex-1"
-                                >
-                                    Completed
-                                </button>
+                                        onClick={() => handleUpdateStatus(campaign._id, "completed")}
+                                        className="btn btn-disabled btn-xs bg-gray-200 text-gray-300 text-white flex-1"
+                                    >
+                                        Completed
+                                    </button> : <button
+                                        onClick={() => handleUpdateStatus(campaign._id, "completed")}
+                                        className="btn btn-xs bg-primary text-white flex-1"
+                                    >
+                                        Completed
+                                    </button>
                                 }
                                 {
                                     campaign.status === 'approved' || campaign.status === 'urgent' || campaign.status === 'completed' ? <button
-                                    onClick={() => handleUpdateStatus(campaign._id, "urgent")}
-                                    className="btn btn-disabled btn-xs btn-warning text-white flex-1"
-                                >
-                                    Urgent
-                                </button> : <button
-                                    onClick={() => handleUpdateStatus(campaign._id, "urgent")}
-                                    className="btn btn-xs btn-warning text-white flex-1"
-                                >
-                                    Urgent
-                                </button>
+                                        onClick={() => handleUpdateStatus(campaign._id, "urgent")}
+                                        className="btn btn-disabled btn-xs btn-warning text-white flex-1"
+                                    >
+                                        Urgent
+                                    </button> : <button
+                                        onClick={() => handleUpdateStatus(campaign._id, "urgent")}
+                                        className="btn btn-xs btn-warning text-white flex-1"
+                                    >
+                                        Urgent
+                                    </button>
                                 }
                                 <button
                                     onClick={() => handleDelete(campaign._id)}

@@ -7,9 +7,21 @@ import useAuth from "../../hooks/useAuth";
 import Swal from "sweetalert2";
 
 const Login = () => {
+
+    const fillAdminCredential = () => {
+        setValue("email", "admin@serveone.com");
+        setValue("password", "admin#@33205");
+    };
+
+    const fillVolunteerCredential = () => {
+        setValue("email", "serveonevolunteer@gmail.com");
+        setValue("password", "volunteer#@33205");
+    };
+
     const {
         register,
         handleSubmit,
+        setValue,
         formState: { errors },
     } = useForm();
 
@@ -33,6 +45,7 @@ const Login = () => {
                 console.log(error)
             })
     };
+
 
 
     return (
@@ -72,6 +85,25 @@ const Login = () => {
                     </form>
                     <div className="divider">OR</div>
                     <GoogleLogin></GoogleLogin>
+
+                    <div className="mt-6 flex flex-col">
+                        <button
+                            type="button"
+                            onClick={fillAdminCredential}
+                            className="btn btn-outline btn-primary w-full mb-4"
+                        >
+                            Admin Credential
+                        </button>
+
+                        <button
+                            type="button"
+                            onClick={fillVolunteerCredential}
+                            className="btn btn-outline btn-secondary w-full"
+                        >
+                            Volunteer Credential
+                        </button>
+                    </div>
+
                     <p className="text-center md:text-left text-accent mt-4">
                         Don't have an account?{" "}
                         <Link to="register" className="text-primary font-semibold cursor-pointer hover:underline">
