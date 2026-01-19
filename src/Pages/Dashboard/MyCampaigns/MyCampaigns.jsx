@@ -2,6 +2,7 @@ import Swal from "sweetalert2";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import useAuth from "../../../hooks/useAuth";
+import { Link } from "react-router";
 
 const MyCampaigns = () => {
     const { user } = useAuth();
@@ -74,7 +75,11 @@ const MyCampaigns = () => {
 
     return (
         <div className="p-4 md:p-6">
-            <h2 className="text-2xl font-bold text-secondary mb-6">My Campaigns</h2>
+            <div className="md:flex justify-between items-center mb-4 md:mb-0 lg:mb-0">
+                <h2 className="text-2xl font-bold text-secondary mb-6">My Campaigns</h2>
+
+                <Link to='/dashboard/addNew-campaign' className="btn btn-primary text-white">Add new campaign</Link>
+            </div>
 
             <div className="hidden md:block bg-white rounded-xl shadow overflow-x-auto">
                 <table className="table w-full">
@@ -101,7 +106,7 @@ const MyCampaigns = () => {
                                     <span
                                         className={`badge 
                                         ${campaign.status === 'urgent' && 'badge-warning text-white'}
-                                        ${campaign.status === 'completed' && 'badge-primary text-white' }
+                                        ${campaign.status === 'completed' && 'badge-primary text-white'}
                                         ${campaign.status !== 'urgent' && campaign.status !== 'completed' && 'badge-ghost'}
         `}
                                     >
@@ -114,7 +119,7 @@ const MyCampaigns = () => {
                                             onClick={() => handleUpdateStatus(campaign._id, "completed")}
                                             className="btn btn-disabled btn-sm bg-gray-200 text-gray-300 hover:bg-primary/90"
                                         >
-                                             Mark Completed
+                                            Mark Completed
                                         </button> : <button
                                             onClick={() => handleUpdateStatus(campaign._id, "completed")}
                                             className="btn btn-sm bg-primary text-white hover:bg-primary/90"
