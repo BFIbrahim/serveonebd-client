@@ -1,6 +1,7 @@
 import React from 'react';
 import { FaLayerGroup, FaFileAlt, FaHandsHelping, FaSmile } from 'react-icons/fa';
 import { IoChevronForwardOutline, IoChevronDownOutline } from 'react-icons/io5';
+import { Link } from 'react-router';
 
 const WorkProcess = () => {
   const steps = [
@@ -69,9 +70,9 @@ const WorkProcess = () => {
         </div>
 
         <div className="mt-20 text-center">
-          <button className="btn btn-primary btn-lg text-white px-12 rounded-full shadow-lg hover:scale-105 transition-transform">
+          <Link to="/help-other" className="btn btn-primary btn-lg text-white px-12 rounded-full shadow-lg hover:scale-105 transition-transform">
             Get Started
-          </button>
+          </Link>
         </div>
       </div>
     </div>

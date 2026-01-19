@@ -137,13 +137,10 @@ const DashboardLayout = () => {
                         <div className="mt-auto w-full">
                             <Link
                                 to="/profile"
-                                className="flex items-center gap-3 rounded-lg px-3 py-2 hover:bg-primary-focus is-drawer-close:tooltip is-drawer-close:tooltip-right"
+                                className="flex items-center justify-center gap-3 rounded-lg px-3 py-2 hover:bg-primary-focus is-drawer-close:tooltip is-drawer-close:tooltip-right"
                                 data-tip="My Profile"
                             >
-                                <FaUserCircle className="text-3xl mb-5" />
-                                <span className="is-drawer-close:hidden font-medium">
-                                    My Profile
-                                </span>
+                                <FaUserCircle className="text-2xl mb-5 text-center" />
                             </Link>
                         </div>
 
