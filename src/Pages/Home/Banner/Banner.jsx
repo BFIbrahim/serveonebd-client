@@ -1,11 +1,10 @@
-import { useNavigate } from "react-router";
+import { Link } from "react-router";
 import Typewriter from 'typewriter-effect';
 
 import "swiper/css";
 import "swiper/css/effect-fade";
 
 const Banner = () => {
-  const navigate = useNavigate();
 
   return (
     <section className="w-full bg-gray-100">
@@ -32,19 +31,12 @@ const Banner = () => {
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4">
-            <button
-              onClick={() => navigate("/help-others")}
-              className="btn btn-primary text-white px-8 py-3 rounded-lg"
-            >
-              I Want Help
-            </button>
-
-            <button
-              onClick={() => navigate("/get-help")}
-              className="btn btn-secondary text-white px-8 py-3 rounded-lg"
-            >
-              I Need Help
-            </button>
+            <Link to='/help-other'>
+              <button className="btn btn-primary text-white px-8 py-3 rounded-lg">I Want Help</button>
+            </Link>
+            <Link to='/get-help'>
+              <button className="btn btn-secondary text-white px-8 py-3 rounded-lg">I Need Help</button>
+            </Link>
           </div>
 
           <div className="mt-6 flex flex-wrap gap-6">
