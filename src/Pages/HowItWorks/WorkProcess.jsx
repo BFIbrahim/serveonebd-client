@@ -70,7 +70,7 @@ const WorkProcess = () => {
         </div>
 
         <div className="mt-20 text-center">
-          <Link to="/help-other" className="btn btn-primary btn-lg text-white px-12 rounded-full shadow-lg hover:scale-105 transition-transform">
+          <Link to="/get-help" className="btn btn-primary btn-lg text-white px-12 rounded-full shadow-lg hover:scale-105 transition-transform">
             Get Started
           </Link>
         </div>

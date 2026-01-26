@@ -21,6 +21,7 @@ import PendingCampaign from "../Pages/Dashboard/PendingCampaign/PendingCampaign"
 import MyCampaigns from "../Pages/Dashboard/MyCampaigns/MyCampaigns";
 import UrgentCampaign from "../Pages/Dashboard/UrgetCampaign/UrgentCampaign";
 import Profile from "../Pages/Profile/Profile";
+import About from "../Pages/About/About";
 
 export const router = createBrowserRouter([
   {
@@ -40,7 +41,8 @@ export const router = createBrowserRouter([
       },
 
       { path: "help-other", element: <HelpOther /> },
-      { path: "work-process", element: <WorkProcess /> }
+      { path: "work-process", element: <WorkProcess /> },
+      {path: "about", element: <About></About>}
     ]
   },
   {

@@ -9,7 +9,10 @@ import { GiWaterRecycling } from "react-icons/gi";
 import { MdOutlineSpaceDashboard } from "react-icons/md";
 import { IoMdLogIn } from "react-icons/io";
 import { RiLogoutCircleLine } from "react-icons/ri";
-import { FaUserCircle, FaTachometerAlt, FaHandsHelping } from "react-icons/fa";
+import { FaUserCircle, FaTachometerAlt, FaHandsHelping, FaInfoCircle } from "react-icons/fa";
+import { RiInformationLine } from "react-icons/ri";
+
+
 
 const Navbar = () => {
 
@@ -32,12 +35,14 @@ const Navbar = () => {
 
     const links = <>
         <li><NavLink to="/"><TiHomeOutline className='text-[18px]' />Home</NavLink></li>
+        <li><NavLink to="/about"><RiInformationLine className='text-[18px]' />About</NavLink></li>
         {
-            user ? <li><NavLink to="/get-help"><FaRegHandshake className='text-[20px]'/>Get Help</NavLink></li> : <li><NavLink to="/login"><FaRegHandshake className='text-[20px]'/>Get Help</NavLink></li> 
+            user ? <li><NavLink to="/get-help"><FaRegHandshake className='text-[20px]' />Get Help</NavLink></li> : <li><NavLink to="/login"><FaRegHandshake className='text-[20px]' />Get Help</NavLink></li>
         }
-        <li><NavLink to="/help-other"><BiDonateHeart className='text-[20px]'/> Help Others</NavLink></li>
-        <li><NavLink to="/work-process"><GiWaterRecycling className='text-[20px] '/>How It Works</NavLink></li>
-        <li><NavLink to="/dashboard"><MdOutlineSpaceDashboard className='text-[20px]'/>Dashboard</NavLink></li>
+
+        <li><NavLink to="/help-other"><BiDonateHeart className='text-[20px]' /> Help Others</NavLink></li>
+        <li><NavLink to="/work-process"><GiWaterRecycling className='text-[20px] ' />How It Works</NavLink></li>
+        <li><NavLink to="/dashboard"><MdOutlineSpaceDashboard className='text-[20px]' />Dashboard</NavLink></li>
     </>
 
     return (
@@ -57,7 +62,7 @@ const Navbar = () => {
                             {links}
                         </ul>
                     </div>
-                    <Link to="/" className="text-secondary md:text-xl font-bold flex items-center"><span><BiDonateHeart className='text-xl md:text-3xl font-bold text-primary'/></span>SERVEONE<span className='text-primary'>BD</span></Link>
+                    <Link to="/" className="text-secondary md:text-xl font-bold flex items-center"><span><BiDonateHeart className='text-xl md:text-3xl font-bold text-primary' /></span>SERVEONE<span className='text-primary'>BD</span></Link>
                 </div>
                 <div className="navbar-center hidden lg:flex">
                     <ul className="menu menu-horizontal px-1">
@@ -66,7 +71,7 @@ const Navbar = () => {
                 </div>
                 <div className="navbar-end">
                     {
-                        user ? <Link onClick={hundleLogout} type='button' className="btn bg-primary text-white"><RiLogoutCircleLine className='text-[20px]'/>Logout</Link> : <Link to="/login" type='button' className="btn bg-primary text-white"><IoMdLogIn className='text-[20px]' />Login</Link>
+                        user ? <Link onClick={hundleLogout} type='button' className="btn bg-primary text-white"><RiLogoutCircleLine className='text-[20px]' />Logout</Link> : <Link to="/login" type='button' className="btn bg-primary text-white"><IoMdLogIn className='text-[20px]' />Login</Link>
 
                     }
 
