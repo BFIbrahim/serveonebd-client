@@ -9,8 +9,10 @@ import { GiWaterRecycling } from "react-icons/gi";
 import { MdOutlineSpaceDashboard } from "react-icons/md";
 import { IoMdLogIn } from "react-icons/io";
 import { RiLogoutCircleLine } from "react-icons/ri";
-import { FaUserCircle, FaTachometerAlt, FaHandsHelping, FaInfoCircle } from "react-icons/fa";
+import { FaUserCircle } from "react-icons/fa";
 import { RiInformationLine } from "react-icons/ri";
+import { GrContact } from "react-icons/gr";
+
 
 
 
@@ -41,7 +43,7 @@ const Navbar = () => {
         }
 
         <li><NavLink to="/help-other"><BiDonateHeart className='text-[20px]' /> Help Others</NavLink></li>
-        <li><NavLink to="/work-process"><GiWaterRecycling className='text-[20px] ' />How It Works</NavLink></li>
+        <li><NavLink to="/contact"><GrContact className='text-[18px]' />Contact</NavLink></li>
         <li><NavLink to="/dashboard"><MdOutlineSpaceDashboard className='text-[20px]' />Dashboard</NavLink></li>
     </>
 

@@ -3,7 +3,6 @@ import RootLayout from "../Layouts/RootLayout";
 import Home from "../Pages/Home/Home/Home";
 import GetHelp from "../Pages/GetHelp/GetHelp/GetHelp";
 import HelpOther from "../Pages/HelpOther/HelpOther/HelpOther";
-import WorkProcess from "../Pages/HowItWorks/WorkProcess";
 import AuthLayout from "../Layouts/AuthLayout";
 import Login from "../Pages/Authentication/Login";
 import Register from "../Pages/Authentication/Register";
@@ -22,6 +21,7 @@ import MyCampaigns from "../Pages/Dashboard/MyCampaigns/MyCampaigns";
 import UrgentCampaign from "../Pages/Dashboard/UrgetCampaign/UrgentCampaign";
 import Profile from "../Pages/Profile/Profile";
 import About from "../Pages/About/About";
+import Contact from "../Pages/Contact/Contact";
 
 export const router = createBrowserRouter([
   {
@@ -41,8 +41,8 @@ export const router = createBrowserRouter([
       },
 
       { path: "help-other", element: <HelpOther /> },
-      { path: "work-process", element: <WorkProcess /> },
-      {path: "about", element: <About></About>}
+      {path: "about", element: <About></About>},
+      {path: "contact", element: <Contact></Contact>},
     ]
   },
   {
