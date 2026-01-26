@@ -36,16 +36,86 @@ const Navbar = () => {
     }
 
     const links = <>
-        <li><NavLink to="/"><TiHomeOutline className='text-[18px]' />Home</NavLink></li>
-        <li><NavLink to="/about"><RiInformationLine className='text-[18px]' />About</NavLink></li>
-        {
-            user ? <li><NavLink to="/get-help"><FaRegHandshake className='text-[20px]' />Get Help</NavLink></li> : <li><NavLink to="/login"><FaRegHandshake className='text-[20px]' />Get Help</NavLink></li>
-        }
+        <li>
+            <NavLink
+                to="/"
+                end
+                className={({ isActive }) =>
+                    `flex items-center gap-2 ${isActive ? "text-primary font-semibold" : ""
+                    }`
+                }
+>
+                <TiHomeOutline className="text-[18px]" />
+                Home
+            </NavLink>
+        </li>
 
-        <li><NavLink to="/help-other"><BiDonateHeart className='text-[20px]' /> Help Others</NavLink></li>
-        <li><NavLink to="/contact"><GrContact className='text-[18px]' />Contact</NavLink></li>
-        <li><NavLink to="/dashboard"><MdOutlineSpaceDashboard className='text-[20px]' />Dashboard</NavLink></li>
+        <li>
+            <NavLink
+                to="/about"
+                className={({ isActive }) =>
+                    `flex items-center gap-2 ${isActive ? "text-primary font-semibold" : ""
+                    }`
+                }
+            >
+                <RiInformationLine className="text-[18px]" />
+                About
+            </NavLink>
+        </li>
+
+        <li>
+            <NavLink
+                to={user ? "/get-help" : "/login"}
+                className={({ isActive }) =>
+                    `flex items-center gap-2 ${isActive ? "text-primary font-semibold" : ""
+                    }`
+                }
+            >
+                <FaRegHandshake className="text-[20px]" />
+                Get Help
+            </NavLink>
+        </li>
+
+        <li>
+            <NavLink
+                to="/help-other"
+                className={({ isActive }) =>
+                    `flex items-center gap-2 ${isActive ? "text-primary font-semibold" : ""
+                    }`
+                }
+            >
+                <BiDonateHeart className="text-[20px]" />
+                Help Others
+            </NavLink>
+        </li>
+
+        <li>
+            <NavLink
+                to="/contact"
+                className={({ isActive }) =>
+                    `flex items-center gap-2 ${isActive ? "text-primary font-semibold" : ""
+                    }`
+                }
+            >
+                <GrContact className="text-[18px]" />
+                Contact
+            </NavLink>
+        </li>
+
+        <li>
+            <NavLink
+                to="/dashboard"
+                className={({ isActive }) =>
+                    `flex items-center gap-2 ${isActive ? "text-primary font-semibold" : ""
+                    }`
+                }
+            >
+                <MdOutlineSpaceDashboard className="text-[20px]" />
+                Dashboard
+            </NavLink>
+        </li>
     </>
+
 
     return (
         <div>
