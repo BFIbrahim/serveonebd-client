@@ -230,7 +230,7 @@ const MyBookings = () => {
                 ) : (
                     <div>
                         <p className="text-center py-6 text-gray-500">No bookings found</p>
-                        <Link to="/get-help" className='btn btn-primary text-white'>Help Requests</Link>
+                        <Link to="/get-help" className='btn btn-primary text-white flex justify-center md:flex-none'>Help Requests</Link>
                     </div>
                 )}
             </div>

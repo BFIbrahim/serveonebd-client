@@ -9,27 +9,24 @@ const Footer = () => {
 
         <ul className="flex flex-col md:flex-row gap-4 text-center md:text-left">
           <li>
-            <Link href="/about" className="hover:text-green-400 transition-colors">About</Link>
+            <Link to="/about" className="hover:text-green-400 transition-colors">About</Link>
           </li>
           <li>
-            <a href="/contact" className="hover:text-green-400 transition-colors">Contact</a>
-          </li>
-          <li>
-            <Link href="/privacy-policy" className="hover:text-green-400 transition-colors">Privacy Policy</Link>
+            <Link to="/contact" className="hover:text-green-400 transition-colors">Contact</Link>
           </li>
         </ul>
 
         <div className="flex gap-4">
-          <Link href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="hover:text-green-400 transition-colors">
+          <Link rel="noopener noreferrer" className="hover:text-green-400 transition-colors">
             <FaFacebookF size={20} />
           </Link>
-          <Link href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="hover:text-green-400 transition-colors">
+          <Link rel="noopener noreferrer" className="hover:text-green-400 transition-colors">
             <FaTwitter size={20} />
           </Link>
-          <Link href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="hover:text-green-400 transition-colors">
+          <Link rel="noopener noreferrer" className="hover:text-green-400 transition-colors">
             <FaInstagram size={20} />
           </Link>
-          <Link href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="hover:text-green-400 transition-colors">
+          <Link rel="noopener noreferrer" className="hover:text-green-400 transition-colors">
             <FaLinkedinIn size={20} />
           </Link>
         </div>
