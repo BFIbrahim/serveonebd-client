@@ -160,12 +160,6 @@ const PendingVolunteers = () => {
           </div>
         ))}
       </div>
-
-      {volunteers.length === 0 && (
-        <p className="text-center text-gray-500 mt-10">
-          No pending volunteers found.
-        </p>
-      )}
     </div>
   );
 };
