@@ -1,154 +1,191 @@
-import React from 'react';
-import { Link, Outlet } from 'react-router';
+import React from "react";
+import { NavLink, Outlet, Link } from "react-router";
 import { AiOutlineHome } from "react-icons/ai";
-import { MdOutlinePendingActions } from "react-icons/md";
+import { LuPanelRightClose } from "react-icons/lu";
+
+import {
+  MdOutlinePendingActions,
+  MdAddBox,
+  MdOutlineCampaign,
+} from "react-icons/md";
 import { IoIosListBox } from "react-icons/io";
-import { FaHandHoldingHeart, FaUserCheck, FaUserClock } from "react-icons/fa";
-import useUserRole from '../hooks/useUserRole';
-import { MdAddBox } from "react-icons/md";
-import { HiOutlineClipboardList } from "react-icons/hi";
-import { MdOutlineCampaign } from "react-icons/md";
-import { HiOutlineExclamationCircle } from 'react-icons/hi';
-import { FaUserCircle } from "react-icons/fa";
+import {
+  FaHandHoldingHeart,
+  FaUserCheck,
+  FaUserClock,
+  FaUserCircle,
+} from "react-icons/fa";
+import {
+  HiOutlineClipboardList,
+  HiOutlineExclamationCircle,
+} from "react-icons/hi";
+import useUserRole from "../hooks/useUserRole";
 
-
+const navClass = ({ isActive }) =>
+  `is-drawer-close:tooltip is-drawer-close:tooltip-right
+   flex items-center gap-3 px-3 py-2 rounded-lg
+   transition-all duration-200
+   hover:bg-secondary/80
+   ${isActive ? "bg-secondary text-white shadow-md" : ""}`;
 
 const DashboardLayout = () => {
+  const { role } = useUserRole();
 
-    const { role } = useUserRole()
-    console.log(role)
+  return (
+    <div className="drawer lg:drawer-open">
+      <input id="my-drawer-4" type="checkbox" className="drawer-toggle" />
 
-    return (
-        <div>
-            <div className="drawer lg:drawer-open">
-                <input id="my-drawer-4" type="checkbox" className="drawer-toggle" />
-                <div className="drawer-content">
-                    {/* Navbar */}
-                    <nav className="navbar w-full bg-base-300">
-                        <label htmlFor="my-drawer-4" aria-label="open sidebar" className="btn btn-square btn-ghost">
-                            {/* Sidebar toggle icon */}
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" strokeLinejoin="round" strokeLinecap="round" strokeWidth="2" fill="none" stroke="currentColor" className="my-1.5 inline-block size-4"><path d="M4 4m0 2a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2z"></path><path d="M9 4v16"></path><path d="M14 10l2 2l-2 2"></path></svg>
-                        </label>
-                        <div className="px-4">
-                            <Link to="/" className="text-secondary text-xl font-bold">SERVEONE<span className='text-primary'>BD</span></Link>
-                        </div>
-                    </nav>
-                    {/* Page content here */}
-                    <div className="p-4">
-                        <Outlet></Outlet>
-                    </div>
-                </div>
+      <div className="drawer-content">
+        <nav className="navbar w-full bg-base-300">
+          <label
+            htmlFor="my-drawer-4"
+            className="btn btn-square btn-ghost"
+          >
+            <LuPanelRightClose className="text-xl" />
+          </label>
 
-                <div className="drawer-side is-drawer-close:overflow-visible">
-                    <label htmlFor="my-drawer-4" aria-label="close sidebar" className="drawer-overlay"></label>
-                    <div className="flex min-h-full flex-col items-start bg-primary text-white is-drawer-close:w-14 is-drawer-open:w-64">
-                        {/* Sidebar content here */}
-                        <ul className="menu w-full grow">
-                            {/* List item */}
-                            <li>
-                                <Link to="/" className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Homepage">
-                                    <AiOutlineHome className='text-xl' />
-                                    <span className="is-drawer-close:hidden">Homepage</span>
-                                </Link>
+          <div className="px-4">
+            <Link to="/" className="text-secondary text-xl font-bold">
+              SERVEONE<span className="text-primary">BD</span>
+            </Link>
+          </div>
+        </nav>
 
-                                <Link to="/dashboard" className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="My Bookings">
-                                    <IoIosListBox className='text-xl' />
-                                    <span className="is-drawer-close:hidden">My Bookings</span>
-                                </Link>
-
-                                {
-                                    (role === 'admin' || role === 'volunteer') ? (<Link
-                                        to="/dashboard/my-campaigns"
-                                        className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
-                                        data-tip="My Campaigns"
-                                    >
-                                        <MdOutlineCampaign className="text-xl" />
-                                        <span className="is-drawer-close:hidden">My Campaigns</span>
-                                    </Link>) : ""
-                                }
-
-                                {
-                                    (role === 'volunteer' || role === "admin") ? "" : (
-                                        <Link to="/dashboard/be-volunteer" className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Be a Volunteer">
-                                            <FaHandHoldingHeart className='text-xl' />
-                                            <span className="is-drawer-close:hidden">Be a Volunteer</span>
-                                        </Link>
-                                    )
-                                }
-
-                                {
-                                    (role === 'admin') ? (<Link to="/dashboard/pending-requests" className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Pending Requests">
-                                        <MdOutlinePendingActions className='text-xl' />
-                                        <span className="is-drawer-close:hidden">PendingRequests</span>
-                                    </Link>) : ""
-                                }
-
-                                {
-                                    (role === 'admin' || role === 'volunteer') ? <Link to="/dashboard/addNew-campaign" className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Add New Campaign">
-                                        <MdAddBox className='text-xl' />
-                                        <span className="is-drawer-close:hidden">Add New Campaign</span>
-                                    </Link> : ""
-                                }
-
-                                {
-                                    role === 'admin' ? <Link
-                                        to="/dashboard/pending-volunteers"
-                                        className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
-                                        data-tip="Pending Volunteers"
-                                    >
-                                        <FaUserClock className="text-xl" />
-                                        <span className="is-drawer-close:hidden">Pending Volunteers</span>
-                                    </Link> : ""
-                                }
-
-                                {
-                                    role === 'admin' ? <Link
-                                        to="/dashboard/active-volunteers"
-                                        className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
-                                        data-tip="Active Volunteers"
-                                    >
-                                        <FaUserCheck className="text-xl" />
-                                        <span className="is-drawer-close:hidden">Active Volunteers</span>
-                                    </Link> : ""
-                                }
-                                {
-                                    role === 'admin' ? <Link
-                                        to="/dashboard/pending-campaigns"
-                                        className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
-                                        data-tip="Pending Campaigns"
-                                    >
-                                        <HiOutlineClipboardList className="text-xl" />
-                                        <span className="is-drawer-close:hidden">Pending Campaigns</span>
-                                    </Link> : ""
-                                }
-                                {
-                                    role === 'admin' ? <Link
-                                        to="/dashboard/urget-campaign"
-                                        className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
-                                        data-tip="Urgent Campaign"
-                                    >
-                                        <HiOutlineExclamationCircle className="text-xl" />
-                                        <span className="is-drawer-close:hidden">Urgent Campaign</span>
-                                    </Link> : ""
-                                }
-                            </li>
-                        </ul>
-
-                        <div className="mt-auto w-full">
-                            <Link
-                                to="/profile"
-                                className="flex items-center justify-center gap-3 rounded-lg px-3 py-2 hover:bg-primary-focus is-drawer-close:tooltip is-drawer-close:tooltip-right"
-                                data-tip="My Profile"
-                            >
-                                <FaUserCircle className="text-2xl mb-5 text-center" />
-                            </Link>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
+        <div className="p-4">
+          <Outlet />
         </div>
-    );
+      </div>
+
+      <div className="drawer-side is-drawer-close:overflow-visible">
+        <label htmlFor="my-drawer-4" className="drawer-overlay"></label>
+
+        <div
+          className="flex min-h-full flex-col bg-primary text-white
+                     is-drawer-close:w-14 is-drawer-open:w-64
+                     transition-all duration-300"
+        >
+          <ul className="menu w-full grow">
+            <li>
+              <NavLink to="/" className={navClass}>
+                <AiOutlineHome className="text-xl" />
+                <span className="is-drawer-close:hidden">Homepage</span>
+              </NavLink>
+
+              <NavLink to="/dashboard" end className={navClass}>
+                <IoIosListBox className="text-xl" />
+                <span className="is-drawer-close:hidden">
+                  My Bookings
+                </span>
+              </NavLink>
+
+              {(role === "admin" || role === "volunteer") && (
+                <NavLink
+                  to="/dashboard/my-campaigns"
+                  className={navClass}
+                >
+                  <MdOutlineCampaign className="text-xl" />
+                  <span className="is-drawer-close:hidden">
+                    My Campaigns
+                  </span>
+                </NavLink>
+              )}
+
+              {role !== "admin" && role !== "volunteer" && (
+                <NavLink
+                  to="/dashboard/be-volunteer"
+                  className={navClass}
+                >
+                  <FaHandHoldingHeart className="text-xl" />
+                  <span className="is-drawer-close:hidden">
+                    Be a Volunteer
+                  </span>
+                </NavLink>
+              )}
+
+              {role === "admin" && (
+                <NavLink
+                  to="/dashboard/pending-requests"
+                  className={navClass}
+                >
+                  <MdOutlinePendingActions className="text-xl" />
+                  <span className="is-drawer-close:hidden">
+                    Pending Requests
+                  </span>
+                </NavLink>
+              )}
+
+              {(role === "admin" || role === "volunteer") && (
+                <NavLink
+                  to="/dashboard/addNew-campaign"
+                  className={navClass}
+                >
+                  <MdAddBox className="text-xl" />
+                  <span className="is-drawer-close:hidden">
+                    Add New Campaign
+                  </span>
+                </NavLink>
+              )}
+
+              {role === "admin" && (
+                <NavLink
+                  to="/dashboard/pending-volunteers"
+                  className={navClass}
+                >
+                  <FaUserClock className="text-xl" />
+                  <span className="is-drawer-close:hidden">
+                    Pending Volunteers
+                  </span>
+                </NavLink>
+              )}
+
+              {role === "admin" && (
+                <NavLink
+                  to="/dashboard/active-volunteers"
+                  className={navClass}
+                >
+                  <FaUserCheck className="text-xl" />
+                  <span className="is-drawer-close:hidden">
+                    Active Volunteers
+                  </span>
+                </NavLink>
+              )}
+
+              {role === "admin" && (
+                <NavLink
+                  to="/dashboard/pending-campaigns"
+                  className={navClass}
+                >
+                  <HiOutlineClipboardList className="text-xl" />
+                  <span className="is-drawer-close:hidden">
+                    Pending Campaigns
+                  </span>
+                </NavLink>
+              )}
+
+              {role === "admin" && (
+                <NavLink
+                  to="/dashboard/urget-campaign"
+                  className={navClass}
+                >
+                  <HiOutlineExclamationCircle className="text-xl" />
+                  <span className="is-drawer-close:hidden">
+                    Urgent Campaign
+                  </span>
+                </NavLink>
+              )}
+            </li>
+          </ul>
+
+          <div className="mt-auto w-full p-2">
+            <NavLink to="/profile" className={navClass}>
+              <FaUserCircle className="text-2xl" />
+              <span className="is-drawer-close:hidden">Profile</span>
+            </NavLink>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
 };
 
 export default DashboardLayout;
