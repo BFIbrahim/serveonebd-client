@@ -30,7 +30,7 @@ const Banner = () => {
             Connect with people and provide essential support like medicine, food, and clothing.
           </p>
 
-          <div className="flex flex-col sm:flex-row gap-4">
+          <div className="flex flex gap-4">
             <Link to='/help-other'>
               <button className="btn btn-primary text-white px-8 py-3 rounded-lg">I Want Help</button>
             </Link>
@@ -39,14 +39,14 @@ const Banner = () => {
             </Link>
           </div>
 
-          <div className="mt-6 flex flex-wrap gap-6">
+          <div className="mt-6 grid grid-cols-3 gap-6">
             <div className="flex flex-col items-start border-r-2 border-gray-400 pr-4">
               <span className="text-primary font-bold text-xl">3000+</span>
               <span className="text-gray-600">People Helped</span>
             </div>
             <div className="flex flex-col items-start border-r-2 border-gray-400 pr-4">
               <span className="text-primary font-bold text-xl">500+</span>
-              <span className="text-gray-600">Volunteers</span>
+              <span className="text-gray-600"> Total Volunteers</span>
             </div>
             <div className="flex flex-col items-start">
               <span className="text-primary font-bold text-xl">100+</span>
