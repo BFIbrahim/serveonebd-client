@@ -3,10 +3,10 @@ ServeOneBD is a full-stack web platform designed to connect people who need esse
 
 ---
 
-## 🔗 Live Demo
+## Live Demo
 
 
-### 🔐 Demo Login Credentials
+### Demo Login Credentials
 For easy testing, demo credentials are provided on the login page.
 
 Admin  
